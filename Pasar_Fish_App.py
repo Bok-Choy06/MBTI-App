@@ -54,7 +54,7 @@ st.markdown("""
         display: block;
         margin: 1rem auto; /* Reduced margin */
         max-width: 100%;
-        max-height: 500px; /* NEW: Limits height so you don't have to scroll */
+        max-height: 1000px; /* NEW: Limits height so you don't have to scroll */
         object-fit: contain; /* NEW: Keeps the image aspect ratio */
         width: auto; /* NEW: Allows width to shrink if needed */
         border-radius: 10px;
