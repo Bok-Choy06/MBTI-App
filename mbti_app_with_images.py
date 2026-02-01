@@ -154,7 +154,7 @@ questions = {
     'Q3': {
         'text': 'After introducing yourself to the group and explaining your situation, the group introduces themselves as Orang Lauts (Sea People). They invite you to join them on their fishing trip in exchange for finding you a way home later. You hop onto one of their boats and look through the many fishing gear they have.',
         'image': 'images/Q3.png',
-        'options': {'J': 'Let's see… which would help me easily catch the most fish?', 'P': 'Woah! I have so many options to try out!'}
+        'options': {'J': "Let's see… which would help me easily catch the most fish?', 'P': 'Woah! I have so many options to try out!"}
     },
     'Q4': {
         'text': 'As the Orang Laut row forward, you look down into the water and see that strange looking fish again swimming alongside your boat. It gives you a playful wink before disappearing, and you hear someone shout “Brace Yourselves!”. A storm approaches the boats and the waves start to shake them violently.',
@@ -199,7 +199,7 @@ questions = {
     'Q12': {
         'text': 'The fish farmer gives you a tour of the fish farm where Barramundi (or Asian Seabass) and red snappers are cultivated using cutting-edge technology that controls feed, oxygen levels and waste. “Weeeeeee!” You hear a voice above you getting louder and look up to see the strange fish plummeting down from the sky. You catch the strange fish in your arms and it jumps at your face. You shut your eyes before opening them to find yourself finally back at the wet market.',
         'image': 'images/Q12.png',
-        'options': {'S': Yay I’m finally back! Was all of that real? How did I do that?', 'N': 'That was so fun! I wonder why that fish made me experience those timelines and places.'}
+        'options': {'S': 'Yay I’m finally back! Was all of that real? How did I do that?', 'N': 'That was so fun! I wonder why that fish made me experience those timelines and places.'}
     }
 }
 
