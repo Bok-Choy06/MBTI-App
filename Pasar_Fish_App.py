@@ -19,12 +19,6 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* FIX 3: Remove the white bar at the top of the page */
-    .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 2rem !important;
-    }
-    
     .main {
         padding: 2rem;
     }
@@ -41,19 +35,20 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #45a049;
     }
-    
-    /* FIX 1 (Part A): Restrict CSS-based image height */
+    .result-box {
+        padding: 2rem;
+        border-radius: 10px;
+        background-color: #f0f2f6;
+        text-align: center;
+        margin: 2rem 0;
+    }
     .question-image {
         display: block;
-        margin: 1rem auto;
-        width: 1000px;        /* fixed size */
-        max-width: 100%;     /* prevents overflow on small screens */
-        max-height: 1000px;
-        object-fit: contain;
+        margin: 2rem auto;
+        max-width: 100%;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    
     .metric-card {
         background-color: #f8f9fa;
         padding: 1.5rem;
@@ -66,16 +61,6 @@ st.markdown("""
         padding: 2rem;
         border-radius: 10px;
         margin: 1rem 0;
-    }
-    
-    /* FIX 2: Change Response Font Size */
-    /* Targets the radio button text. 16px is approx 2 'steps' smaller than the default H3 header */
-    .stRadio p {
-        font-size: 16px !important;
-    }
-    div[role="radiogroup"] label > div:first-child {
-        /* Optional: adjust spacing between radio options if needed */
-        margin-bottom: 10px; 
     }
     </style>
     """, unsafe_allow_html=True)
