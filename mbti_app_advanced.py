@@ -206,7 +206,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     """Create social media share buttons and track clicks"""
     
     # URLs for your app (you'll update this after deployment)
-    app_url = "https://your-app-url.streamlit.app"  # UPDATE THIS AFTER DEPLOYMENT
+    app_url = "https://mbti-app-tme5nvwq7m5t6jstrfofze.streamlit.app/"  # UPDATE THIS AFTER DEPLOYMENT
     share_text = f"I just discovered I'm an {mbti_type}! Take the MBTI personality test and find out your type:"
     
     st.markdown("### 📢 Share Your Results!")
@@ -266,7 +266,7 @@ def track_share(platform, mbti_type, source):
             platform,
             mbti_type,
             source,
-            "your-app-url.streamlit.app"  # UPDATE THIS
+            "https://mbti-app-tme5nvwq7m5t6jstrfofze.streamlit.app/"  # UPDATE THIS
         ]
         shares_sheet.append_row(share_data)
     except Exception as e:
