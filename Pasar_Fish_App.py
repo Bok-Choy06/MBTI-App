@@ -359,13 +359,13 @@ def demographics_page():
     # The image should be uploaded to your GitHub repo (e.g., in an 'images' folder)
     # Option 1: Local file path
     if os.path.exists('Pasar Fish.png'):
-        st.image('Pasar Fish.png', use_container_width=True)
+        st.image('Pasar Fish.png', width=600)
     elif os.path.exists('images/Pasar Fish.png'):
-        st.image('images/Pasar Fish.png', use_container_width=True)
+        st.image('images/Pasar Fish.png', width=600)
     elif os.path.exists('Pasar Fish.jpg'):
-        st.image('Pasar Fish.jpg', use_container_width=True)
+        st.image('Pasar Fish.jpg', width=600)
     elif os.path.exists('images/Pasar Fish.jpg'):
-        st.image('images/Pasar Fish.jpg', use_container_width=True)
+        st.image('images/Pasar Fish.jpg', width=600)
     # Option 2: If you want to use a URL instead, uncomment below and add your URL
     # st.image('https://your-image-url.com/pasar-fish.png', use_container_width=True)
     
