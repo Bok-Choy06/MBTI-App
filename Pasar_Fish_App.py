@@ -46,7 +46,7 @@ st.markdown("""
     .question-image {
         display: block;
         margin: 2rem auto;
-        max-width: 100%;
+        max-width: 50%;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
