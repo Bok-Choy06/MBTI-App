@@ -142,64 +142,64 @@ def load_responses_from_sheets():
 # OR use direct URLs: 'image': 'https://example.com/image.jpg'
 questions = {
     'Q1': {
-        'text': 'Do you focus more on...',
-        'image': None,  # Example: 'images/q1.png' or 'https://example.com/image.jpg'
-        'options': {'S': 'Facts and concrete details', 'N': 'Patterns and possibilities'}
+        'text': '“Psst! Over here!” You turn to see a strange looking fish on a mural talking to you as you walk through the wet market. “Wanna go on an adventure with me?',
+        'image': 'images/Q1.png',
+        'options': {'S': 'Wait… did that fish painting just speak to me', 'N': 'An adventure? That sounds fun!'}
     },
     'Q2': {
-        'text': 'Do you get energy from...',
-        'image': None,
-        'options': {'E': 'Being with others', 'I': 'Spending time alone'}
+        'text': 'Before you can answer, you are swept away by a magical wave. When you open your eyes, you find yourself standing on a coast with wooden sampans docked at the edge of the water. A group of people with Bubu (woven rattan) fish traps, spears, nets, and fishing handlines stand around the boats.',
+        'image': 'images/Q2.png',
+        'options': {'E': 'I should ask them for help and information! They seem like they know where we are.', 'I': 'Let me observe them first before approaching, what if they’re dangerous?'}
     },
     'Q3': {
-        'text': 'Do you prefer...',
-        'image': None,
-        'options': {'J': 'Structure and planning', 'P': 'Flexibility and spontaneity'}
+        'text': 'After introducing yourself to the group and explaining your situation, the group introduces themselves as Orang Lauts (Sea People). They invite you to join them on their fishing trip in exchange for finding you a way home later. You hop onto one of their boats and look through the many fishing gear they have.',
+        'image': 'images/Q3.png',
+        'options': {'J': 'Let's see… which would help me easily catch the most fish?', 'P': 'Woah! I have so many options to try out!'}
     },
     'Q4': {
-        'text': 'When making decisions, do you rely more on...',
-        'image': None,
-        'options': {'T': 'Logic and objectivity', 'F': 'Values and emotions'}
+        'text': 'As the Orang Laut row forward, you look down into the water and see that strange looking fish again swimming alongside your boat. It gives you a playful wink before disappearing, and you hear someone shout “Brace Yourselves!”. A storm approaches the boats and the waves start to shake them violently.',
+        'image': 'images/Q4.png',
+        'options': {'T': 'Secure all the fishing gear! Let’s find a way to make sure our boat does not capsize.', 'F': 'I hope no one gets injured or falls overboard!'}
     },
     'Q5': {
-        'text': 'Do you tend to...',
-        'image': None,
-        'options': {'J': 'Make decisions quickly', 'P': 'Keep options open'}
+        'text': 'You feel yourself get thrown overboard! You shut your eyes tight expecting to feel a rush of cold sea water hit your body, but you crash onto a hard surface with a loud thud instead. “Oi, stop sleeping and get back to work.” You open your eyes and find yourself laying on the wooden planks of a kelong and a fisherman standing over you.',
+        'image': 'images/Q5.png',
+        'options': {'J': 'Back to work? Can’t I explore this new place a bit first to see where or when I am?', 'P': 'Okay, tell me what I need to do so I can maybe find a way back to my timeline.'}
     },
     'Q6': {
-        'text': 'Are you more...',
-        'image': None,
-        'options': {'E': 'Outgoing and expressive', 'I': 'Reserved and reflective'}
+        'text': '“Come help me feed the fish,” the fisherman says before handing you a bag of fish food. You take the bag and begin to throw fish food into the cage-nets filled with hungry groupers with the fisherman. It almost feels… peaceful.',
+        'image': 'images/Q6.png',
+        'options': {'E': 'Talk to the fisherman about your strange adventure so far and his life on the kelong.', 'I': 'Enjoy the peacefulness and silence while feeding the fish.'}
     },
     'Q7': {
-        'text': 'Do you prefer...',
-        'image': None,
-        'options': {'S': 'Practical and realistic approaches', 'N': 'Imaginative and innovative ideas'}
+        'text': 'As you feed the fish you see a glowing light appear in the cage-net closest to you. “BOO!” You jump in shock as the strange fish pops up amongst the groupers and scares you. Losing your balance, you fall into the cage-net with a big splash!',
+        'image': 'images/Q7.png',
+        'options': {'S': 'You’ve gotta be kidding me… Why is this happening to me and how do I get out of this net?', 'N': 'Maybe I’ll be transported again just like before! Where will I go this time?'}
     },
     'Q8': {
-        'text': 'Do you value...',
-        'image': None,
-        'options': {'T': 'Fairness and consistency', 'F': 'Harmony and compassion'}
+        'text': 'The groupers in the cage-net begin to swim frantically and the splashing water causes you to close your eyes. You feel a push that causes you to fly up into the air. You brace yourself for the impact of the hard wooden floor, but you feel yourself landing onto something softer. “OW! What even…” You hear someone exclaim from under you.',
+        'image': 'images/Q8.png',
+        'options': {'T': 'How did this happen? Where am I and did I injure this person?', 'F': 'Oh my god, I’m so sorry are you okay? I didn’t mean to do that, I’m sorry!'}
     },
     'Q9': {
-        'text': 'When solving problems, do you focus on...',
-        'image': None,
-        'options': {'T': 'Rational analysis', 'F': 'How it affects people'}
+        'text': 'You stand up and help the person up from the wet, slippery, concrete ground. As the smell of fish surrounds you, you look around and see multiple stacks of crates in a variety of sizes and colours and fish mongers preparing and selling many types of fish. The person introduces themselves as a fish monger in Jurong Fishery Port and excitedly offers you a tour.',
+        'image': 'images/Q9.png',
+        'options': {'T': 'Oh, Jurong! I know how to get home from here!', 'F': 'I feel like going home, but I think I’ll stay for a short tour since they’re excited to give me one!'}
     },
     'Q10': {
-        'text': 'Do you like...',
-        'image': None,
-        'options': {'J': 'Having things settled', 'P': 'Adapting as you go'}
+        'text': 'The fish monger takes you on a tour around the fishery port, sharing that Singapore imports their fish from countries such as Malaysia, Indonesia, Vietnam, and other countries. As he shares that fish from our local fish farms are sometimes sold here as well, something moving in the crate of ice catches your eye. It’s that strange fish again!',
+        'image': 'images/Q10.png',
+        'options': {'J': 'Uh oh… Here we go again. At least tell me where we’re going first.', 'P': 'Oh, is it time to leave here now? Okay, I’m ready!'}
     },
     'Q11': {
-        'text': 'In social situations, are you more...',
-        'image': None,
-        'options': {'E': 'Talkative and enthusiastic', 'I': 'Quiet and observant'}
+        'text': '“Watch out!” You hear the fish monger shout. You turn to see a giant crate of ice at the top of the stack crashing down onto you. You squeeze your eyes shut in terror and anticipation, but nothing hits you. “Hey, you okay?” You open your eyes and see someone in front of you and giant tanks filled with a variety of fish with high-tech equipment in the area. The person in front introduces themselves as one of the local fish farmers.',
+        'image': 'images/Q11.png',
+        'options': {'E': 'You will not believe what I’ve gone through today [Begin sharing what has happened]', 'I': 'Oh, I’m okay, nice to meet you.'}
     },
     'Q12': {
-        'text': 'Do you trust...',
-        'image': None,
-        'options': {'S': 'Your experience and what you know', 'N': 'Your intuition and hunches'}
+        'text': 'The fish farmer gives you a tour of the fish farm where Barramundi (or Asian Seabass) and red snappers are cultivated using cutting-edge technology that controls feed, oxygen levels and waste. “Weeeeeee!” You hear a voice above you getting louder and look up to see the strange fish plummeting down from the sky. You catch the strange fish in your arms and it jumps at your face. You shut your eyes before opening them to find yourself finally back at the wet market.',
+        'image': 'images/Q12.png',
+        'options': {'S': Yay I’m finally back! Was all of that real? How did I do that?', 'N': 'That was so fun! I wonder why that fish made me experience those timelines and places.'}
     }
 }
 
