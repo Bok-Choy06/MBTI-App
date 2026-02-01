@@ -41,13 +41,6 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #45a049;
     }
-    .result-box {
-        padding: 2rem;
-        border-radius: 10px;
-        background-color: #f0f2f6;
-        text-align: center;
-        margin: 2rem 0;
-    }
     
     /* FIX 1 (Part A): Restrict CSS-based image height */
     .question-image {
