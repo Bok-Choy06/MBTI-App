@@ -425,14 +425,8 @@ def question_page(question_num):
     
     st.markdown("---")
     
-    # Question container
-    st.markdown('<div class="question-container">', unsafe_allow_html=True)
-    
     # Question text
     st.markdown(f"### {q_data['text']}")
-
-    # Close container
-    st.markdown('</div>', unsafe_allow_html=True)
     
     # Image (if provided)
     if q_data['image']:
