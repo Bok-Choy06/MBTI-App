@@ -250,15 +250,15 @@ fish_images = {
 def create_share_buttons(mbti_type, share_source="result_page"):
     """Create social media share buttons and track clicks"""
     
-    # URLs for your app
-    app_url = "https://your-app-url.streamlit.app"  # UPDATE THIS AFTER DEPLOYMENT
+    # URLs for your app - UPDATE THIS AFTER DEPLOYMENT
+    app_url = "https://your-app-url.streamlit.app"
     share_text = f"I just discovered I'm a {mbti_type} fish! 🐟 Take the quiz to find out which local fish matches your personality:"
     
     st.markdown("### 📢 Share Your Results!")
     
     col1, col2, col3, col4, col5 = st.columns(5)
     
-    # Instagram (Story sharing - opens Instagram)
+    # Instagram
     with col1:
         instagram_url = f"https://www.instagram.com/"
         st.markdown("""
@@ -266,11 +266,10 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 <a href="{}" target="_blank" style="text-decoration: none;">
                     <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
                 </a>
+                <br><br>
+                <p style="font-size: 12px; color: #888;">Screenshot to share!</p>
             </div>
         """.format(instagram_url), unsafe_allow_html=True)
-        if st.button("Share", key="instagram_btn"):
-            track_share("Instagram", mbti_type, share_source)
-            st.caption("Screenshot to share!")
     
     # X (Twitter)
     with col2:
@@ -282,8 +281,6 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 </a>
             </div>
         """.format(x_url), unsafe_allow_html=True)
-        if st.button("Share", key="x_btn"):
-            track_share("X", mbti_type, share_source)
     
     # LinkedIn
     with col3:
@@ -295,8 +292,6 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 </a>
             </div>
         """.format(linkedin_url), unsafe_allow_html=True)
-        if st.button("Share", key="linkedin_btn"):
-            track_share("LinkedIn", mbti_type, share_source)
     
     # WhatsApp
     with col4:
@@ -308,8 +303,6 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 </a>
             </div>
         """.format(whatsapp_url), unsafe_allow_html=True)
-        if st.button("Share", key="whatsapp_btn"):
-            track_share("WhatsApp", mbti_type, share_source)
     
     # Telegram
     with col5:
@@ -321,8 +314,9 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 </a>
             </div>
         """.format(telegram_url), unsafe_allow_html=True)
-        if st.button("Share", key="telegram_btn"):
-            track_share("Telegram", mbti_type, share_source)
+    
+    # Track shares (optional - happens in background)
+    st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
 
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
@@ -399,23 +393,18 @@ def demographics_page():
         <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
     """, unsafe_allow_html=True)
     
-    # Center-aligned image
-    if os.path.exists('Pasar Fish.png'):
-        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
-        st.image('Pasar Fish.png', width=600)
-        st.markdown('</div>', unsafe_allow_html=True)
-    elif os.path.exists('images/Pasar Fish.png'):
-        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
-        st.image('images/Pasar Fish.png', width=600)
-        st.markdown('</div>', unsafe_allow_html=True)
-    elif os.path.exists('Pasar Fish.jpg'):
-        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
-        st.image('Pasar Fish.jpg', width=600)
-        st.markdown('</div>', unsafe_allow_html=True)
-    elif os.path.exists('images/Pasar Fish.jpg'):
-        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
-        st.image('images/Pasar Fish.jpg', width=600)
-        st.markdown('</div>', unsafe_allow_html=True)
+    # Center-aligned image - using columns method
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col2:
+        if os.path.exists('Pasar Fish.png'):
+            st.image('Pasar Fish.png', use_container_width=True)
+        elif os.path.exists('images/Pasar Fish.png'):
+            st.image('images/Pasar Fish.png', use_container_width=True)
+        elif os.path.exists('Pasar Fish.jpg'):
+            st.image('Pasar Fish.jpg', use_container_width=True)
+        elif os.path.exists('images/Pasar Fish.jpg'):
+            st.image('images/Pasar Fish.jpg', use_container_width=True)
     
     # Center-aligned text
     st.markdown("""
@@ -714,36 +703,44 @@ def show_results():
     with col1:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
-                <br><br>
-                <a href="https://pasarfish.com" target="_blank" style="font-size: 16px;">Pasarfish.com</a>
+                <a href="https://pasarfish.com" target="_blank" style="text-decoration: none;">
+                    <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
+                    <br>
+                    <span style="font-size: 14px; color: #4A90E2;">Pasarfish.com</span>
+                </a>
             </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
-                <br><br>
-                <a href="https://instagram.com/pasarfishsg" target="_blank" style="font-size: 16px;">@Pasarfishsg</a>
+                <a href="https://instagram.com/pasarfishsg" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                    <br>
+                    <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                </a>
             </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
-                <br><br>
-                <a href="https://linkedin.com/company/pasarfish" target="_blank" style="font-size: 16px;">@Pasarfish</a>
+                <a href="https://linkedin.com/company/pasarfish" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
+                    <br>
+                    <span style="font-size: 14px; color: #4A90E2;">@Pasarfish</span>
+                </a>
             </div>
         """, unsafe_allow_html=True)
     
     with col4:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
-                <br><br>
-                <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="font-size: 16px;">@Pasarfishsg</a>
+                <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
+                    <br>
+                    <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                </a>
             </div>
         """, unsafe_allow_html=True)
     
