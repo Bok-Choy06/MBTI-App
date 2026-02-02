@@ -373,24 +373,35 @@ def show_progress():
 
 def demographics_page():
     """Show demographics collection page"""
-    st.title("🐟 Which Local Fish Are You?")
     
-    # Add the Pasar Fish image
-    # The image should be uploaded to your GitHub repo (e.g., in an 'images' folder)
-    # Option 1: Local file path
+    # Center-aligned title
+    st.markdown("""
+        <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
+    """, unsafe_allow_html=True)
+    
+    # Center-aligned image
     if os.path.exists('Pasar Fish.png'):
+        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
         st.image('Pasar Fish.png', width=600)
+        st.markdown('</div>', unsafe_allow_html=True)
     elif os.path.exists('images/Pasar Fish.png'):
+        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
         st.image('images/Pasar Fish.png', width=600)
+        st.markdown('</div>', unsafe_allow_html=True)
     elif os.path.exists('Pasar Fish.jpg'):
+        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
         st.image('Pasar Fish.jpg', width=600)
+        st.markdown('</div>', unsafe_allow_html=True)
     elif os.path.exists('images/Pasar Fish.jpg'):
+        st.markdown('<div style="display: flex; justify-content: center;">', unsafe_allow_html=True)
         st.image('images/Pasar Fish.jpg', width=600)
-    # Option 2: If you want to use a URL instead, uncomment below and add your URL
-    # st.image('https://your-image-url.com/pasar-fish.png', use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown("### Embark on a journey through time and markets to discover your inner fishy personality!")
-    st.markdown("#### Let's start with a few details about you.")
+    # Center-aligned text
+    st.markdown("""
+        <h3 style="text-align: center;">Embark on a journey through time and markets to discover your inner fishy personality!</h3>
+        <h4 style="text-align: center;">Let's start with a few details about you.</h4>
+    """, unsafe_allow_html=True)
     
     show_progress()
     
@@ -690,36 +701,36 @@ def show_results():
     with col1:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fas fa-globe" style="font-size: 24px; color: #4CAF50;"></i>
-                <p><strong>Website</strong></p>
-                <a href="https://pasarfish.com" target="_blank">Pasarfish.com</a>
+                <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
+                <br><br>
+                <a href="https://pasarfish.com" target="_blank" style="font-size: 16px;">Pasarfish.com</a>
             </div>
         """, unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-instagram" style="font-size: 24px; color: #E4405F;"></i>
-                <p><strong>Instagram</strong></p>
-                <a href="https://instagram.com/pasarfishsg" target="_blank">@Pasarfishsg</a>
+                <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                <br><br>
+                <a href="https://instagram.com/pasarfishsg" target="_blank" style="font-size: 16px;">@Pasarfishsg</a>
             </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-linkedin" style="font-size: 24px; color: #0077B5;"></i>
-                <p><strong>LinkedIn</strong></p>
-                <a href="https://linkedin.com/company/pasarfish" target="_blank">@Pasarfish</a>
+                <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
+                <br><br>
+                <a href="https://linkedin.com/company/pasarfish" target="_blank" style="font-size: 16px;">@Pasarfish</a>
             </div>
         """, unsafe_allow_html=True)
     
     with col4:
         st.markdown("""
             <div style="text-align: center;">
-                <i class="fab fa-facebook" style="font-size: 24px; color: #1877F2;"></i>
-                <p><strong>Facebook</strong></p>
-                <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank">@Pasarfishsg</a>
+                <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
+                <br><br>
+                <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="font-size: 16px;">@Pasarfishsg</a>
             </div>
         """, unsafe_allow_html=True)
     
