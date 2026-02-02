@@ -227,6 +227,26 @@ mbti_descriptions = {
     'ENTJ': 'The Commander - Bold, imaginative, and strong-willed'
 }
 
+# Fish image mapping - NEW DICTIONARY (ADD THIS)
+fish_images = {
+    'ISTJ': 'images/fish/ISTJ.png',
+    'ISFJ': 'images/fish/ISFJ.png',
+    'INFJ': 'images/fish/INFJ.png',
+    'INTJ': 'images/fish/INTJ.png',
+    'ISTP': 'images/fish/ISTP.png',
+    'ISFP': 'images/fish/ISFP.png',
+    'INFP': 'images/fish/INFP.png',
+    'INTP': 'images/fish/INTP.png',
+    'ESTP': 'images/fish/ESTP.png',
+    'ESFP': 'images/fish/ESFP.png',
+    'ENFP': 'images/fish/ENFP.png',
+    'ENTP': 'images/fish/ENTP.png',
+    'ESTJ': 'images/fish/ESTJ.png',
+    'ESFJ': 'images/fish/ESFJ.png',
+    'ENFJ': 'images/fish/ENFJ.png',
+    'ENTJ': 'images/fish/ENTJ.png'
+}
+
 def create_share_buttons(mbti_type, share_source="result_page"):
     """Create social media share buttons and track clicks"""
     
@@ -658,32 +678,25 @@ def show_results():
     
     st.info(f"⏱️ Completed in: {time_str}")
     
-    st.markdown("## 🎉 Your Result")
-    st.markdown(f"""
-    <div class="result-box">
-        <h1 style="color: #4CAF50; margin-bottom: 0.5rem;">{mbti_type}</h1>
-        <h3 style="color: #555; margin-top: 0;">{description}</h3>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("## 🎉 Your Fish!")
     
-    # Show the breakdown
-    st.markdown("### 📊 Your Profile Breakdown")
-    col1, col2, col3, col4 = st.columns(4)
+    # Display fish image instead of MBTI type text
+    fish_image_path = fish_images.get(mbti_type)
     
-    with col1:
-        st.metric("E/I", dimensions['E_I'])
-        st.caption("Extraversion vs Introversion")
-    with col2:
-        st.metric("S/N", dimensions['S_N'])
-        st.caption("Sensing vs Intuition")
-    with col3:
-        st.metric("T/F", dimensions['T_F'])
-        st.caption("Thinking vs Feeling")
-    with col4:
-        st.metric("J/P", dimensions['J_P'])
-        st.caption("Judging vs Perceiving")
-
-    st.markdown("---")
+    if fish_image_path and os.path.exists(fish_image_path):
+        # Center the fish image
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.image(fish_image_path, use_container_width=True)
+    else:
+        # Fallback if image doesn't exist
+        st.markdown(f"""
+        <div class="result-box">
+            <h1 style="color: #4CAF50; margin-bottom: 0.5rem;">{mbti_type}</h1>
+            <h3 style="color: #555; margin-top: 0;">{description}</h3>
+            <p style="color: #888;">Fish image not found. Please upload: {fish_image_path}</p>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Follow Links Section
     st.markdown(
