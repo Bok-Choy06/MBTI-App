@@ -860,6 +860,129 @@ def analytics_page():
         color_continuous_scale='Purples'
     )
     st.plotly_chart(fig_referral, use_container_width=True)
+
+    st.markdown("---")
+    
+    # Time Analytics Section
+    st.markdown("## ⏱️ Time Analytics")
+    
+    # Check if time columns exist in the data
+    time_cols_exist = 'Total_Survey_Time' in df.columns
+    
+    if time_cols_exist:
+        # Overall time statistics
+        st.markdown("### 📊 Survey Completion Time")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            avg_time = df['Total_Survey_Time'].mean()
+            st.metric("Average Time", f"{int(avg_time // 60)}m {int(avg_time % 60)}s")
+        
+        with col2:
+            median_time = df['Total_Survey_Time'].median()
+            st.metric("Median Time", f"{int(median_time // 60)}m {int(median_time % 60)}s")
+        
+        with col3:
+            min_time = df['Total_Survey_Time'].min()
+            st.metric("Fastest", f"{int(min_time // 60)}m {int(min_time % 60)}s")
+        
+        with col4:
+            max_time = df['Total_Survey_Time'].max()
+            st.metric("Slowest", f"{int(max_time // 60)}m {int(max_time % 60)}s")
+        
+        # Distribution of completion times
+        st.markdown("### 📈 Completion Time Distribution")
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Histogram
+            fig_hist = px.histogram(
+                df,
+                x='Total_Survey_Time',
+                nbins=20,
+                title="Distribution of Total Survey Time",
+                labels={'Total_Survey_Time': 'Time (seconds)', 'count': 'Number of Responses'},
+                color_discrete_sequence=['#4CAF50']
+            )
+            fig_hist.update_layout(showlegend=False)
+            st.plotly_chart(fig_hist, use_container_width=True)
+        
+        with col2:
+            # Box plot
+            fig_box = px.box(
+                df,
+                y='Total_Survey_Time',
+                title="Survey Time Box Plot",
+                labels={'Total_Survey_Time': 'Time (seconds)'},
+                color_discrete_sequence=['#2196F3']
+            )
+            st.plotly_chart(fig_box, use_container_width=True)
+        
+        # Question-by-question time analysis
+        st.markdown("### 🔍 Time Per Question")
+        
+        question_time_cols = [f'Q{i}_Time' for i in range(1, 13)]
+        
+        # Check if individual question time columns exist
+        if all(col in df.columns for col in question_time_cols):
+            # Calculate average time per question
+            avg_times = []
+            for q_col in question_time_cols:
+                avg_times.append({
+                    'Question': q_col.replace('_Time', ''),
+                    'Average Time (seconds)': df[q_col].mean()
+                })
+            
+            time_df = pd.DataFrame(avg_times)
+            
+            # Bar chart of average time per question
+            fig_question_time = px.bar(
+                time_df,
+                x='Question',
+                y='Average Time (seconds)',
+                title="Average Time Spent on Each Question",
+                color='Average Time (seconds)',
+                color_continuous_scale='Teal',
+                labels={'Average Time (seconds)': 'Avg Time (sec)'}
+            )
+            st.plotly_chart(fig_question_time, use_container_width=True)
+            
+            # Show which questions take longest
+            time_df_sorted = time_df.sort_values('Average Time (seconds)', ascending=False)
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**⏰ Longest Questions:**")
+                for idx, row in time_df_sorted.head(3).iterrows():
+                    st.write(f"{row['Question']}: {row['Average Time (seconds)']:.1f}s")
+            
+            with col2:
+                st.markdown("**⚡ Fastest Questions:**")
+                for idx, row in time_df_sorted.tail(3).iterrows():
+                    st.write(f"{row['Question']}: {row['Average Time (seconds)']:.1f}s")
+            
+            # Time by MBTI type
+            st.markdown("### 🐟 Completion Time by Fish Type")
+            
+            time_by_type = df.groupby('MBTI_Type')['Total_Survey_Time'].agg(['mean', 'count']).reset_index()
+            time_by_type = time_by_type[time_by_type['count'] >= 2]  # Only show types with 2+ responses
+            time_by_type = time_by_type.sort_values('mean', ascending=False)
+            
+            if len(time_by_type) > 0:
+                fig_type_time = px.bar(
+                    time_by_type,
+                    x='MBTI_Type',
+                    y='mean',
+                    title="Average Completion Time by Personality Type",
+                    labels={'mean': 'Average Time (seconds)', 'MBTI_Type': 'Fish Type'},
+                    color='mean',
+                    color_continuous_scale='Sunset'
+                )
+                st.plotly_chart(fig_type_time, use_container_width=True)
+    else:
+        st.info("⏱️ Time tracking data not available for this dataset.")
     
     # Download data option
     st.markdown("---")
