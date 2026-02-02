@@ -765,9 +765,16 @@ def survey_page():
 
 def analytics_page():
     """Analytics dashboard page"""
-    st.title("📊 Analytics Dashboard")
-    st.markdown("### Fish Quiz Statistics & Insights")
-    
+    st.markdown(
+        """
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <h1>📊 Analytics Dashboard</h1>
+            <h3>Fish Quiz Statistics & Insights</h3>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     # Load data from Google Sheets
     with st.spinner("Loading analytics data..."):
         df = load_responses_from_sheets()
@@ -784,22 +791,16 @@ def analytics_page():
         st.metric("Total Responses", len(df))
     
     with col2:
-        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
         unique_types = df['MBTI_Type'].nunique()
         st.metric("Unique MBTI Types", unique_types)
-        st.markdown('</div>', unsafe_allow_html=True)
     
     with col3:
-        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
         most_common = df['MBTI_Type'].mode()[0] if len(df) > 0 else "N/A"
         st.metric("Most Common Type", most_common)
-        st.markdown('</div>', unsafe_allow_html=True)
     
     with col4:
-        st.markdown('<div class="metric-card">', unsafe_allow_html=True)
         today_responses = len(df[pd.to_datetime(df['Timestamp']).dt.date == datetime.now().date()])
         st.metric("Today's Responses", today_responses)
-        st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown("---")
     
