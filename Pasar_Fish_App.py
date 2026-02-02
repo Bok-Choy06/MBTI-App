@@ -675,9 +675,16 @@ def show_results():
     st.markdown("---")
     
     # Follow Links Section
-    st.markdown("### 🌐 Follow Pasar Fish!")
-    st.markdown("Stay connected with us for more fishy adventures:")
-    
+    st.markdown(
+        """
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <h3>🌐 Follow Pasar Fish!</h3>
+            <p>Stay connected with us for more fishy adventures:</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
@@ -685,7 +692,7 @@ def show_results():
             <div style="text-align: center;">
                 <i class="fas fa-globe" style="font-size: 24px; color: #4CAF50;"></i>
                 <p><strong>Website</strong></p>
-                <a href="https://pasarfish.com" target="_blank">pasarfish.com</a>
+                <a href="https://pasarfish.com" target="_blank">Pasarfish.com</a>
             </div>
         """, unsafe_allow_html=True)
     
@@ -694,7 +701,7 @@ def show_results():
             <div style="text-align: center;">
                 <i class="fab fa-instagram" style="font-size: 24px; color: #E4405F;"></i>
                 <p><strong>Instagram</strong></p>
-                <a href="https://instagram.com/pasarfishsg" target="_blank">@pasarfishsg</a>
+                <a href="https://instagram.com/pasarfishsg" target="_blank">@Pasarfishsg</a>
             </div>
         """, unsafe_allow_html=True)
     
@@ -703,7 +710,7 @@ def show_results():
             <div style="text-align: center;">
                 <i class="fab fa-linkedin" style="font-size: 24px; color: #0077B5;"></i>
                 <p><strong>LinkedIn</strong></p>
-                <a href="https://linkedin.com/company/pasarfish" target="_blank">@pasarfish</a>
+                <a href="https://linkedin.com/company/pasarfish" target="_blank">@Pasarfish</a>
             </div>
         """, unsafe_allow_html=True)
     
@@ -712,7 +719,7 @@ def show_results():
             <div style="text-align: center;">
                 <i class="fab fa-facebook" style="font-size: 24px; color: #1877F2;"></i>
                 <p><strong>Facebook</strong></p>
-                <a href="https://facebook.com/pasarfish" target="_blank">@pasarfish</a>
+                <a href="https://facebook.com/Pasarfishsg" target="_blank">@Pasarfishsg</a>
             </div>
         """, unsafe_allow_html=True)
     
