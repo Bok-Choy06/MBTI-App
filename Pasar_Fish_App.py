@@ -65,6 +65,11 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# Add Font Awesome for brand icons
+st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    """, unsafe_allow_html=True)
+
 # Load the data
 @st.cache_data
 def load_mbti_data():
@@ -236,38 +241,68 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     # Instagram (Story sharing - opens Instagram)
     with col1:
         instagram_url = f"https://www.instagram.com/"
-        if st.button("📸 Instagram"):
+        st.markdown("""
+            <div style="text-align: center;">
+                <a href="{}" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                </a>
+            </div>
+        """.format(instagram_url), unsafe_allow_html=True)
+        if st.button("Share", key="instagram_btn"):
             track_share("Instagram", mbti_type, share_source)
-            st.markdown(f'<a href="{instagram_url}" target="_blank">Share on Instagram Stories →</a>', unsafe_allow_html=True)
-            st.caption("Screenshot your result to share!")
+            st.caption("Screenshot to share!")
     
     # X (Twitter)
     with col2:
         x_url = f"https://twitter.com/intent/tweet?text={quote(share_text)}&url={quote(app_url)}"
-        if st.button("𝕏 X"):
+        st.markdown("""
+            <div style="text-align: center;">
+                <a href="{}" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-x-twitter" style="font-size: 32px; color: #000000;"></i>
+                </a>
+            </div>
+        """.format(x_url), unsafe_allow_html=True)
+        if st.button("Share", key="x_btn"):
             track_share("X", mbti_type, share_source)
-            st.markdown(f'<a href="{x_url}" target="_blank">Click to open X →</a>', unsafe_allow_html=True)
     
     # LinkedIn
     with col3:
         linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
-        if st.button("💼 LinkedIn"):
+        st.markdown("""
+            <div style="text-align: center;">
+                <a href="{}" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
+                </a>
+            </div>
+        """.format(linkedin_url), unsafe_allow_html=True)
+        if st.button("Share", key="linkedin_btn"):
             track_share("LinkedIn", mbti_type, share_source)
-            st.markdown(f'<a href="{linkedin_url}" target="_blank">Click to open LinkedIn →</a>', unsafe_allow_html=True)
     
     # WhatsApp
     with col4:
         whatsapp_url = f"https://wa.me/?text={quote(share_text + ' ' + app_url)}"
-        if st.button("💬 WhatsApp"):
+        st.markdown("""
+            <div style="text-align: center;">
+                <a href="{}" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-whatsapp" style="font-size: 32px; color: #25D366;"></i>
+                </a>
+            </div>
+        """.format(whatsapp_url), unsafe_allow_html=True)
+        if st.button("Share", key="whatsapp_btn"):
             track_share("WhatsApp", mbti_type, share_source)
-            st.markdown(f'<a href="{whatsapp_url}" target="_blank">Click to open WhatsApp →</a>', unsafe_allow_html=True)
     
     # Telegram
     with col5:
         telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
-        if st.button("✈️ Telegram"):
+        st.markdown("""
+            <div style="text-align: center;">
+                <a href="{}" target="_blank" style="text-decoration: none;">
+                    <i class="fab fa-telegram" style="font-size: 32px; color: #0088cc;"></i>
+                </a>
+            </div>
+        """.format(telegram_url), unsafe_allow_html=True)
+        if st.button("Share", key="telegram_btn"):
             track_share("Telegram", mbti_type, share_source)
-            st.markdown(f'<a href="{telegram_url}" target="_blank">Click to open Telegram →</a>', unsafe_allow_html=True)
 
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
@@ -636,6 +671,54 @@ def show_results():
     with col4:
         st.metric("J/P", dimensions['J_P'])
         st.caption("Judging vs Perceiving")
+
+    st.markdown("---")
+    
+    # Follow Links Section
+    st.markdown("### 🌐 Follow Pasar Fish!")
+    st.markdown("Stay connected with us for more fishy adventures:")
+    
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        st.markdown("""
+            <div style="text-align: center;">
+                <i class="fas fa-globe" style="font-size: 24px; color: #4CAF50;"></i>
+                <p><strong>Website</strong></p>
+                <a href="https://pasarfish.com" target="_blank">pasarfish.com</a>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+            <div style="text-align: center;">
+                <i class="fab fa-instagram" style="font-size: 24px; color: #E4405F;"></i>
+                <p><strong>Instagram</strong></p>
+                <a href="https://instagram.com/pasarfishsg" target="_blank">@pasarfishsg</a>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+            <div style="text-align: center;">
+                <i class="fab fa-linkedin" style="font-size: 24px; color: #0077B5;"></i>
+                <p><strong>LinkedIn</strong></p>
+                <a href="https://linkedin.com/company/pasarfish" target="_blank">@pasarfish</a>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with col4:
+        st.markdown("""
+            <div style="text-align: center;">
+                <i class="fab fa-facebook" style="font-size: 24px; color: #1877F2;"></i>
+                <p><strong>Facebook</strong></p>
+                <a href="https://facebook.com/pasarfish" target="_blank">@pasarfish</a>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Share buttons (existing code continues here)
     
     st.markdown("---")
     
