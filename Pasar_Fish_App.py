@@ -719,7 +719,7 @@ def show_results():
             <div style="text-align: center;">
                 <i class="fab fa-facebook" style="font-size: 24px; color: #1877F2;"></i>
                 <p><strong>Facebook</strong></p>
-                <a href="https://facebook.com/Pasarfishsg" target="_blank">@Pasarfishsg</a>
+                <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank">@Pasarfishsg</a>
             </div>
         """, unsafe_allow_html=True)
     
