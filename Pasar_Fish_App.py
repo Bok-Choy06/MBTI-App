@@ -229,22 +229,22 @@ mbti_descriptions = {
 
 # Fish image mapping - NEW DICTIONARY (ADD THIS)
 fish_images = {
-    'ISTJ': 'images/fish/ISTJ.png',
-    'ISFJ': 'images/fish/ISFJ.png',
-    'INFJ': 'images/fish/INFJ.png',
-    'INTJ': 'images/fish/INTJ.png',
-    'ISTP': 'images/fish/ISTP.png',
-    'ISFP': 'images/fish/ISFP.png',
-    'INFP': 'images/fish/INFP.png',
-    'INTP': 'images/fish/INTP.png',
-    'ESTP': 'images/fish/ESTP.png',
-    'ESFP': 'images/fish/ESFP.png',
-    'ENFP': 'images/fish/ENFP.png',
-    'ENTP': 'images/fish/ENTP.png',
-    'ESTJ': 'images/fish/ESTJ.png',
-    'ESFJ': 'images/fish/ESFJ.png',
-    'ENFJ': 'images/fish/ENFJ.png',
-    'ENTJ': 'images/fish/ENTJ.png'
+    'ISTJ': 'images/Malabar_Red_Snapper.jpg',
+    'ISFJ': 'images/Anchovy.jpg',
+    'INFJ': 'images/Brownbanded_Bamboo_Shark.jpg',
+    'INTJ': 'images/Diamond_Trevally.jpg',
+    'ISTP': 'images/Unicorn_Leatherjacket.jpg',
+    'ISFP': 'images/Barramundi.jpg',
+    'INFP': 'images/Bombay_Duck.jpg',
+    'INTP': 'images/Whitespotted_Whipray.jpg',
+    'ESTP': 'images/Narrow_Based Spanish Mackerel.jpg',
+    'ESFP': 'images/Black_Promfret.jpg',
+    'ENFP': 'images/Yellowtail_Fusilier.jpg',
+    'ENTP': 'images/Indian_Mackerel.jpg',
+    'ESTJ': 'images/Wolf_Herring.jpg',
+    'ESFJ': 'images/Yellowtail_Croaker.jpg',
+    'ENFJ': 'images/Longtailed_Tuna.jpg',
+    'ENTJ': 'images/Giant_Grouper.jpg'
 }
 
 def create_share_buttons(mbti_type, share_source="result_page"):
