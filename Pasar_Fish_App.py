@@ -225,41 +225,49 @@ mbti_descriptions = {
 def create_share_buttons(mbti_type, share_source="result_page"):
     """Create social media share buttons and track clicks"""
     
-    # URLs for your app (you'll update this after deployment)
+    # URLs for your app
     app_url = "https://your-app-url.streamlit.app"  # UPDATE THIS AFTER DEPLOYMENT
     share_text = f"I just discovered I'm a {mbti_type} fish! 🐟 Take the quiz to find out which local fish matches your personality:"
     
     st.markdown("### 📢 Share Your Results!")
     
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
+    # Instagram (Story sharing - opens Instagram)
     with col1:
-        twitter_url = f"https://twitter.com/intent/tweet?text={quote(share_text)}&url={quote(app_url)}"
-        if st.button("🐦 Share on Twitter"):
-            track_share("Twitter", mbti_type, share_source)
-            st.markdown(f'<a href="{twitter_url}" target="_blank">Click here if not redirected</a>', unsafe_allow_html=True)
-            st.write("Opening Twitter...")
+        instagram_url = f"https://www.instagram.com/"
+        if st.button("📸 Instagram"):
+            track_share("Instagram", mbti_type, share_source)
+            st.markdown(f'<a href="{instagram_url}" target="_blank">Share on Instagram Stories →</a>', unsafe_allow_html=True)
+            st.caption("Screenshot your result to share!")
     
+    # X (Twitter)
     with col2:
-        linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
-        if st.button("💼 Share on LinkedIn"):
-            track_share("LinkedIn", mbti_type, share_source)
-            st.markdown(f'<a href="{linkedin_url}" target="_blank">Click here if not redirected</a>', unsafe_allow_html=True)
-            st.write("Opening LinkedIn...")
+        x_url = f"https://twitter.com/intent/tweet?text={quote(share_text)}&url={quote(app_url)}"
+        if st.button("𝕏 X"):
+            track_share("X", mbti_type, share_source)
+            st.markdown(f'<a href="{x_url}" target="_blank">Click to open X →</a>', unsafe_allow_html=True)
     
+    # LinkedIn
     with col3:
-        whatsapp_url = f"https://wa.me/?text={quote(share_text + ' ' + app_url)}"
-        if st.button("💬 Share on WhatsApp"):
-            track_share("WhatsApp", mbti_type, share_source)
-            st.markdown(f'<a href="{whatsapp_url}" target="_blank">Click here if not redirected</a>', unsafe_allow_html=True)
-            st.write("Opening WhatsApp...")
+        linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
+        if st.button("💼 LinkedIn"):
+            track_share("LinkedIn", mbti_type, share_source)
+            st.markdown(f'<a href="{linkedin_url}" target="_blank">Click to open LinkedIn →</a>', unsafe_allow_html=True)
     
+    # WhatsApp
     with col4:
-        email_url = f"mailto:?subject=Check out this MBTI Test&body={quote(share_text + ' ' + app_url)}"
-        if st.button("📧 Share via Email"):
-            track_share("Email", mbti_type, share_source)
-            st.markdown(f'<a href="{email_url}" target="_blank">Click here if not redirected</a>', unsafe_allow_html=True)
-            st.write("Opening Email...")
+        whatsapp_url = f"https://wa.me/?text={quote(share_text + ' ' + app_url)}"
+        if st.button("💬 WhatsApp"):
+            track_share("WhatsApp", mbti_type, share_source)
+            st.markdown(f'<a href="{whatsapp_url}" target="_blank">Click to open WhatsApp →</a>', unsafe_allow_html=True)
+    
+    # Telegram
+    with col5:
+        telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
+        if st.button("✈️ Telegram"):
+            track_share("Telegram", mbti_type, share_source)
+            st.markdown(f'<a href="{telegram_url}" target="_blank">Click to open Telegram →</a>', unsafe_allow_html=True)
 
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
