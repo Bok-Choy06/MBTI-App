@@ -350,8 +350,11 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     
     # Share text WITH URL (for most platforms)
     share_text_with_url = f"{app_url} 
-    I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality!"
+    I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
     
+    # Share text WITHOUT URL (for Telegram only - URL passed separately)
+    share_text = f"I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
+        
     # White background container for share section
     st.markdown('<div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">', unsafe_allow_html=True)
     
