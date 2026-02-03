@@ -310,19 +310,26 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     # Convert to full URL if you have it hosted publicly
     # fish_image_url = f"https://your-domain.com/{fish_image_path}"
     
-    # Share text with actual fish name
-    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
+    # Share text WITH URL (for most platforms)
+    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
+    
+    # Share text WITHOUT URL (for Telegram only - URL passed separately)
+    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
     
     st.markdown("### 📢 Share Your Results!")
     
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
-    # Copy Link - icon only
+   # Copy Link - shows message to download image
     with col1:
-        if st.button("🔗", key="copy_btn", help="Copy link"):
-            st.code(app_url, language=None)
-            st.caption("📋 Copy the link above!")
-            track_share("Copy Link", mbti_type, share_source)
+        if st.button("🔗", key="copy_btn", help="Copy result"):
+            # Get the fish image path
+            fish_image_path = fish_images.get(mbti_type)
+            fish_name = fish_names.get(mbti_type, mbti_type)
+            
+            st.success("📸 Right-click the fish image above and select 'Save Image' to download your result!")
+            st.caption(f"Your fish: {fish_name}")
+            track_share("Copy Result", mbti_type, share_source)
     
     # Instagram - icon only (screenshot method)
     with col2:
@@ -339,7 +346,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     
     # X (Twitter) - icon only with auto-filled text
     with col3:
-        x_url = f"https://twitter.com/intent/tweet?text={quote(share_text)}"
+        x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on X/Twitter">
@@ -365,7 +372,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     
     # WhatsApp - icon only with pre-filled message
     with col5:
-        whatsapp_url = f"https://wa.me/?text={quote(share_text)}"
+        whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on WhatsApp">
@@ -472,10 +479,14 @@ def demographics_page():
         <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
     """, unsafe_allow_html=True)
     
-    # Center-aligned image - using columns method
+    # Center-aligned image with white background
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
+        st.markdown("""
+            <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+        """, unsafe_allow_html=True)
+        
         if os.path.exists('Pasar Fish.png'):
             st.image('Pasar Fish.png', use_container_width=True)
         elif os.path.exists('images/Pasar Fish.png'):
@@ -484,6 +495,8 @@ def demographics_page():
             st.image('Pasar Fish.jpg', use_container_width=True)
         elif os.path.exists('images/Pasar Fish.jpg'):
             st.image('images/Pasar Fish.jpg', use_container_width=True)
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     # Center-aligned text
     st.markdown("""
