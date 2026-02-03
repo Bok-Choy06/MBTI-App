@@ -349,8 +349,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     # fish_image_url = f"https://your-domain.com/{fish_image_path}"
     
     # Share text WITH URL (for most platforms)
-    share_text_with_url = f"{app_url} 
-    I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
+    share_text_with_url = f"{app_url} I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
     
     # Share text WITHOUT URL (for Telegram only - URL passed separately)
     share_text = f"I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
