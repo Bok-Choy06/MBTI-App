@@ -19,9 +19,36 @@ st.set_page_config(
 
 st.markdown("""
     <style>
+    /* Make app more responsive */
     .main {
-        padding: 2rem;
+        padding: 1rem;
+        max-width: 100%;
     }
+    
+    /* Responsive for mobile */
+    @media (max-width: 768px) {
+        .main {
+            padding: 0.5rem;
+        }
+        .stButton>button {
+            font-size: 0.9rem;
+            padding: 0.4rem;
+        }
+        h1 {
+            font-size: 1.5rem !important;
+        }
+        h3 {
+            font-size: 1.2rem !important;
+        }
+    }
+    
+    /* Fit content to viewport */
+    .block-container {
+        max-width: 100%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
     .stButton>button {
         width: 100%;
         background-color: #4CAF50;
@@ -44,7 +71,7 @@ st.markdown("""
     }
     .question-image {
         display: block;
-        margin: 2rem auto;
+        margin: 1rem auto;
         max-width: 100%;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -58,9 +85,20 @@ st.markdown("""
     }
     .question-container {
         background-color: #f8f9fa;
-        padding: 2rem;
+        padding: 1.5rem;
         border-radius: 10px;
         margin: 1rem 0;
+    }
+    
+    /* Make images responsive */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Reduce spacing for better fit */
+    .stMarkdown {
+        margin-bottom: 0.5rem;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -311,12 +349,13 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     # fish_image_url = f"https://your-domain.com/{fish_image_path}"
     
     # Share text WITH URL (for most platforms)
-    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
+    share_text_with_url = f"{app_url} 
+    I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality!"
     
-    # Share text WITHOUT URL (for Telegram only - URL passed separately)
-    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
+    # White background container for share section
+    st.markdown('<div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">', unsafe_allow_html=True)
     
-    st.markdown("### 📢 Share Your Results!")
+    st.markdown('<h3 style="text-align: center; color: #333;">📢 Share Your Results!</h3>', unsafe_allow_html=True)
     
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
@@ -400,9 +439,11 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     # Helper text
     st.markdown("""
         <div style="text-align: center; margin-top: 1rem; color: #888; font-size: 12px;">
-            💡 Click on the icons to share your result! For Instagram, screenshot this page and post.
+            💡 Click on the icons to share your result! For Instagram, save the image above and post.
         </div>
     """, unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)  # Close white background container
     
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
@@ -798,25 +839,30 @@ def show_results():
         </div>
         """, unsafe_allow_html=True)
     
-    # Follow Links Section
+    # Follow Links Section with white background
     st.markdown(
         """
-        <div style="text-align: center; margin-bottom: 1.5rem;">
-            <h3>🌐 Follow Pasar Fish!</h3>
-            <p>Stay connected with us for more fishy adventures:</p>
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <h3 style="color: #333;">🌐 Follow Pasar Fish!</h3>
+                <p style="color: #666;">Stay connected with us for more fishy adventures:</p>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 
+    # Create white background container
+    st.markdown('<div style="background-color: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">', unsafe_allow_html=True)
+    
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown("""
-            <div style="text-align: center;">
+            <div style="text-align: center; padding: 1rem;">
                 <a href="https://pasarfish.com" target="_blank" style="text-decoration: none;">
                     <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
-                    <br>
+                    <br><br>
                     <span style="font-size: 14px; color: #4A90E2;">Pasarfish.com</span>
                 </a>
             </div>
@@ -824,10 +870,10 @@ def show_results():
     
     with col2:
         st.markdown("""
-            <div style="text-align: center;">
+            <div style="text-align: center; padding: 1rem;">
                 <a href="https://instagram.com/pasarfishsg" target="_blank" style="text-decoration: none;">
                     <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
-                    <br>
+                    <br><br>
                     <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
                 </a>
             </div>
@@ -835,10 +881,10 @@ def show_results():
     
     with col3:
         st.markdown("""
-            <div style="text-align: center;">
+            <div style="text-align: center; padding: 1rem;">
                 <a href="https://linkedin.com/company/pasarfish" target="_blank" style="text-decoration: none;">
                     <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
-                    <br>
+                    <br><br>
                     <span style="font-size: 14px; color: #4A90E2;">@Pasarfish</span>
                 </a>
             </div>
@@ -846,16 +892,16 @@ def show_results():
     
     with col4:
         st.markdown("""
-            <div style="text-align: center;">
+            <div style="text-align: center; padding: 1rem;">
                 <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="text-decoration: none;">
                     <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
-                    <br>
+                    <br><br>
                     <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
                 </a>
             </div>
         """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Share buttons (existing code continues here)
     
