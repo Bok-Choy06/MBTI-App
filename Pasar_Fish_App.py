@@ -368,7 +368,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
             fish_image_path = fish_images.get(mbti_type)
             fish_name = fish_names.get(mbti_type, mbti_type)
             
-            st.success("📸 Right-click the fish image above and select 'Save Image' to download your result!")
+            st.success("📸 Right-click and select 'Save Image' to download your result!")
             st.caption(f"Your fish: {fish_name}")
             track_share("Copy Result", mbti_type, share_source)
     
