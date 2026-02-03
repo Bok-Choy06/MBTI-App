@@ -67,7 +67,7 @@ st.markdown("""
 
 # Add Font Awesome for brand icons
 st.markdown("""
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     """, unsafe_allow_html=True)
 
 # Load the data
@@ -300,7 +300,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     """Create social media share buttons - icons only, no buttons"""
     
     # Get your actual deployed app URL - UPDATE THIS!
-    app_url = "https://your-app-url.streamlit.app"
+    app_url = "https://pasarfishapp-eu7kqgndtsmiy9pwfz9zrr.streamlit.app/"
     
     # Get the actual fish name
     fish_name = fish_names.get(mbti_type, mbti_type)
@@ -321,7 +321,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     with col1:
         if st.button("🔗", key="copy_btn", help="Copy link"):
             st.code(app_url, language=None)
-            st.caption("📋 Copy link above!")
+            st.caption("📋 Copy the link above!")
             track_share("Copy Link", mbti_type, share_source)
     
     # Instagram - icon only (screenshot method)
