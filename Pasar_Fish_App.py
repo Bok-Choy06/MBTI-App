@@ -880,10 +880,7 @@ def show_results():
             </div>
         </div>
     """, unsafe_allow_html=True)
-
-    # Create white background container
-    st.markdown('<div style="background-color: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">', unsafe_allow_html=True)
-    
+ 
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
