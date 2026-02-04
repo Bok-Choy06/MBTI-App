@@ -366,7 +366,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
     telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
     
-    # Use .format() instead of f-string to avoid {{ }} conflicts
+    # Build HTML content using .format()
     html_content = """
         <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 900px;">
             <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">📢 Share Your Results!</h3>
@@ -411,7 +411,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
         </div>
     """.format(x_url=x_url, linkedin_url=linkedin_url, whatsapp_url=whatsapp_url, telegram_url=telegram_url)
     
-     # CRITICAL: Add unsafe_allow_html=True
+    # CRITICAL: Add unsafe_allow_html=True
     st.markdown(html_content, unsafe_allow_html=True)
     
 def track_share(platform, mbti_type, source):
