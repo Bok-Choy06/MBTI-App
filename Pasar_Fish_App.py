@@ -509,39 +509,33 @@ def demographics_page():
         <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
     """, unsafe_allow_html=True)
     
-    # Create white box using Streamlit container
-    with st.container():
-        # Apply white background styling
-        st.markdown("""
-            <style>
-            .landing-image-container {
-                background-color: white;
-                padding: 2rem;
-                border-radius: 15px;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                margin: 2rem auto;
-                max-width: 700px;
-            }
-            </style>
+    # Function to convert image to base64
+    def get_image_base64(image_path):
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    
+    # Find and encode the image
+    image_path = None
+    if os.path.exists('Pasar Fish.png'):
+        image_path = 'Pasar Fish.png'
+    elif os.path.exists('images/Pasar Fish.png'):
+        image_path = 'images/Pasar Fish.png'
+    elif os.path.exists('Pasar Fish.jpg'):
+        image_path = 'Pasar Fish.jpg'
+    elif os.path.exists('images/Pasar Fish.jpg'):
+        image_path = 'images/Pasar Fish.jpg'
+    
+    if image_path:
+        img_base64 = get_image_base64(image_path)
+        img_extension = 'png' if image_path.endswith('.png') else 'jpeg'
+        
+        st.markdown(f"""
+            <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 700px; text-align: center;">
+                <img src="data:image/{img_extension};base64,{img_base64}" 
+                     style="max-width: 100%; height: auto; border-radius: 10px;" 
+                     alt="Pasar Fish">
+            </div>
         """, unsafe_allow_html=True)
-        
-        # Wrapper div
-        st.markdown('<div class="landing-image-container">', unsafe_allow_html=True)
-        
-        # Image centered using columns
-        col1, col2, col3 = st.columns([1, 3, 1])
-        with col2:
-            if os.path.exists('Pasar Fish.png'):
-                st.image('Pasar Fish.png', use_container_width=True)
-            elif os.path.exists('images/Pasar Fish.png'):
-                st.image('images/Pasar Fish.png', use_container_width=True)
-            elif os.path.exists('Pasar Fish.jpg'):
-                st.image('Pasar Fish.jpg', use_container_width=True)
-            elif os.path.exists('images/Pasar Fish.jpg'):
-                st.image('images/Pasar Fish.jpg', use_container_width=True)
-        
-        # Close wrapper
-        st.markdown('</div>', unsafe_allow_html=True)
     
     # Center-aligned text
     st.markdown("""
