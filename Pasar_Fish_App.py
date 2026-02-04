@@ -841,18 +841,45 @@ def show_results():
         </div>
         """, unsafe_allow_html=True)
     
-    # Follow Links Section with white background
-    st.markdown(
-        """
+    # Follow Links Section - ALL content in one white box
+    st.markdown("""
         <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
-            <div style="text-align: center; margin-bottom: 1.5rem;">
-                <h3 style="color: #333;">🌐 Follow Pasar Fish!</h3>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3 style="color: #333; margin-bottom: 0.5rem;">🌐 Follow Pasar Fish!</h3>
                 <p style="color: #666;">Stay connected with us for more fishy adventures:</p>
             </div>
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://pasarfish.com" target="_blank" style="text-decoration: none;">
+                        <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">Pasarfish.com</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://instagram.com/pasarfishsg" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://linkedin.com/company/pasarfish" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfish</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+    """, unsafe_allow_html=True)
 
     # Create white background container
     st.markdown('<div style="background-color: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">', unsafe_allow_html=True)
