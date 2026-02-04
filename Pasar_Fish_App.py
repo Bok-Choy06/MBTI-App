@@ -19,36 +19,61 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* Make app more responsive */
+    /* Main container adjustments */
     .main {
         padding: 1rem;
-        max-width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
     }
     
-    /* Responsive for mobile */
+    /* Responsive breakpoints */
     @media (max-width: 768px) {
         .main {
             padding: 0.5rem;
+            max-width: 100%;
         }
         .stButton>button {
             font-size: 0.9rem;
             padding: 0.4rem;
         }
         h1 {
-            font-size: 1.5rem !important;
+            font-size: 1.3rem !important;
         }
         h3 {
-            font-size: 1.2rem !important;
+            font-size: 1.1rem !important;
+        }
+        h4 {
+            font-size: 1rem !important;
+        }
+        /* Make images smaller on mobile */
+        img {
+            max-width: 90% !important;
+            margin: 0 auto !important;
+            display: block !important;
         }
     }
     
-    /* Fit content to viewport */
+    /* Desktop - limit image size */
+    @media (min-width: 769px) {
+        img {
+            max-width: 600px !important;
+            max-height: 500px !important;
+            margin: 0 auto !important;
+            display: block !important;
+            object-fit: contain !important;
+        }
+    }
+    
+    /* Block container - reduce padding */
     .block-container {
         max-width: 100%;
         padding-top: 1rem;
         padding-bottom: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     
+    /* Button styling */
     .stButton>button {
         width: 100%;
         background-color: #4CAF50;
@@ -62,43 +87,57 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #45a049;
     }
+    
+    /* Result box */
     .result-box {
-        padding: 2rem;
+        padding: 1.5rem;
         border-radius: 10px;
         background-color: #f0f2f6;
         text-align: center;
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
+    
+    /* Question images - constrained size */
     .question-image {
         display: block;
         margin: 1rem auto;
         max-width: 100%;
+        max-height: 400px;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        object-fit: contain;
     }
+    
+    /* Metric card */
     .metric-card {
         background-color: #f8f9fa;
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 1rem 0;
+        margin: 0.5rem 0;
     }
+    
+    /* Question container */
     .question-container {
         background-color: #f8f9fa;
         padding: 1.5rem;
         border-radius: 10px;
         margin: 1rem 0;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
-    /* Make images responsive */
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* Reduce spacing for better fit */
+    /* Reduce spacing */
     .stMarkdown {
         margin-bottom: 0.5rem;
+    }
+    
+    /* Center columns content */
+    [data-testid="column"] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     </style>
     """, unsafe_allow_html=True)
