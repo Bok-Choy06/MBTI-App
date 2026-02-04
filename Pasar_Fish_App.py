@@ -346,108 +346,72 @@ countries = [
 ]
 
 def create_share_buttons(mbti_type, share_source="result_page"):
-    """Create social media share buttons - icons only, no buttons"""
+    """Create social media share buttons - all in white box"""
     
-    # Get your actual deployed app URL - UPDATE THIS!
+    # Get your actual deployed app URL
     app_url = "https://pasarfishapp-eu7kqgndtsmiy9pwfz9zrr.streamlit.app/"
     
     # Get the actual fish name
     fish_name = fish_names.get(mbti_type, mbti_type)
     
-    # Get fish image URL (for platforms that support it)
-    fish_image_path = fish_images.get(mbti_type, '')
-    # Convert to full URL if you have it hosted publicly
-    # fish_image_url = f"https://your-domain.com/{fish_image_path}"
-    
     # Share text WITH URL (for most platforms)
-    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟 Take the Pasar Fish quiz to find out which local fish matches your personality! {app_url}"
+    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
     
-    # Share text WITHOUT URL (for Telegram only - URL passed separately)
-    share_text = f"I just discovered I'm a {fish_name} 🐟 Take the Pasar Fish quiz to find out which local fish matches your personality!"
-        
-    # White background container for share section
-    st.markdown('<div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">', unsafe_allow_html=True)
+    # Share text WITHOUT URL (for Telegram - URL passed separately)
+    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
     
-    st.markdown('<h3 style="text-align: center; color: #333;">📢 Share Your Results!</h3>', unsafe_allow_html=True)
+    # Build URLs
+    x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
+    linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
+    whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
+    telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
     
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
-    
-   # Copy Link - shows message to download image
-    with col1:
-        if st.button("🔗", key="copy_btn", help="Copy result"):
-            # Get the fish image path
-            fish_image_path = fish_images.get(mbti_type)
-            fish_name = fish_names.get(mbti_type, mbti_type)
+    # Use .format() instead of f-string to avoid {{ }} conflicts
+    html_content = """
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 900px;">
+            <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">📢 Share Your Results!</h3>
             
-            st.success("📸 Right-click and select 'Save Image' to download your result!")
-            st.caption(f"Your fish: {fish_name}")
-            track_share("Copy Result", mbti_type, share_source)
-    
-    # Instagram - icon only (screenshot method)
-    with col2:
-        instagram_url = "https://www.instagram.com/"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on Instagram">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-instagram" style="font-size: 40px; color: #E4405F;"></i>
-                    </button>
-                </a>
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem; padding: 1rem;">
+                
+                <div style="text-align: center;">
+                    <a href="https://www.instagram.com/" target="_blank" title="Share on Instagram">
+                        <i class="fab fa-instagram" style="font-size: 48px; color: #E4405F;"></i>
+                    </a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="{x_url}" target="_blank" title="Share on X/Twitter">
+                        <i class="fab fa-x-twitter" style="font-size: 48px; color: #000000;"></i>
+                    </a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="{linkedin_url}" target="_blank" title="Share on LinkedIn">
+                        <i class="fab fa-linkedin" style="font-size: 48px; color: #0077B5;"></i>
+                    </a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="{whatsapp_url}" target="_blank" title="Share on WhatsApp">
+                        <i class="fab fa-whatsapp" style="font-size: 48px; color: #25D366;"></i>
+                    </a>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="{telegram_url}" target="_blank" title="Share on Telegram">
+                        <i class="fab fa-telegram" style="font-size: 48px; color: #0088cc;"></i>
+                    </a>
+                </div>
+                
             </div>
-        """.format(instagram_url), unsafe_allow_html=True)
-    
-    # X (Twitter) - icon only with auto-filled text
-    with col3:
-        x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on X/Twitter">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-x-twitter" style="font-size: 40px; color: #000000;"></i>
-                    </button>
-                </a>
+            
+            <div style="text-align: center; margin-top: 1rem; color: #888; font-size: 12px;">
+                💡 Click icons to share! For Instagram, screenshot this page.
             </div>
-        """.format(x_url), unsafe_allow_html=True)
+        </div>
+    """.format(x_url=x_url, linkedin_url=linkedin_url, whatsapp_url=whatsapp_url, telegram_url=telegram_url)
     
-    # LinkedIn - icon only with URL
-    with col4:
-        linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on LinkedIn">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-linkedin" style="font-size: 40px; color: #0077B5;"></i>
-                    </button>
-                </a>
-            </div>
-        """.format(linkedin_url), unsafe_allow_html=True)
-    
-    # WhatsApp - icon only with pre-filled message
-    with col5:
-        whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on WhatsApp">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i>
-                    </button>
-                </a>
-            </div>
-        """.format(whatsapp_url), unsafe_allow_html=True)
-    
-    # 2. Update your Telegram logic
-    with col6:
-        # Telegram will now take the 'url' parameter and the 'text' separately
-        telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on Telegram">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-telegram" style="font-size: 40px; color: #0088cc;"></i>
-                    </button>
-                </a>
-            </div>
-        """.format(telegram_url), unsafe_allow_html=True)
+    st.markdown(html_content, unsafe_allow_html=True)
     
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
