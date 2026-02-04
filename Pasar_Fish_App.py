@@ -522,14 +522,16 @@ def demographics_page():
         <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
     """, unsafe_allow_html=True)
     
-    # Center-aligned image with white background
+    # Center-aligned image with white background - ALL in one container
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
+        # Single white box containing the image
         st.markdown("""
             <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">
         """, unsafe_allow_html=True)
         
+        # Image will be inside the white box
         if os.path.exists('Pasar Fish.png'):
             st.image('Pasar Fish.png', use_container_width=True)
         elif os.path.exists('images/Pasar Fish.png'):
@@ -539,6 +541,7 @@ def demographics_page():
         elif os.path.exists('images/Pasar Fish.jpg'):
             st.image('images/Pasar Fish.jpg', use_container_width=True)
         
+        # Close white box
         st.markdown("</div>", unsafe_allow_html=True)
     
     # Center-aligned text
