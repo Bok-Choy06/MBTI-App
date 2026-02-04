@@ -19,61 +19,57 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* Main container adjustments */
-    .main {
-        padding: 1rem;
-        max-width: 1200px;
-        margin: 0 auto;
+    /* Force all images to be reasonable sizes */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
     }
     
-    /* Responsive breakpoints */
+    /* Main container */
+    .main {
+        padding: 1rem;
+        max-width: 100%;
+    }
+    
+    /* Desktop - constrain image sizes */
+    @media (min-width: 769px) {
+        .main img {
+            max-width: 500px !important;
+            max-height: 400px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+        }
+    }
+    
+    /* Mobile - smaller images */
     @media (max-width: 768px) {
         .main {
             padding: 0.5rem;
-            max-width: 100%;
         }
-        .stButton>button {
-            font-size: 0.9rem;
-            padding: 0.4rem;
+        .main img {
+            max-width: 280px !important;
+            max-height: 280px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
         }
         h1 {
-            font-size: 1.3rem !important;
+            font-size: 1.5rem !important;
         }
         h3 {
-            font-size: 1.1rem !important;
-        }
-        h4 {
-            font-size: 1rem !important;
-        }
-        /* Make images smaller on mobile */
-        img {
-            max-width: 90% !important;
-            margin: 0 auto !important;
-            display: block !important;
+            font-size: 1.2rem !important;
         }
     }
     
-    /* Desktop - limit image size */
-    @media (min-width: 769px) {
-        img {
-            max-width: 600px !important;
-            max-height: 500px !important;
-            margin: 0 auto !important;
-            display: block !important;
-            object-fit: contain !important;
-        }
+    /* Constrain the white background boxes */
+    .main > div > div > div {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
-    /* Block container - reduce padding */
-    .block-container {
-        max-width: 100%;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    
-    /* Button styling */
     .stButton>button {
         width: 100%;
         background-color: #4CAF50;
@@ -87,57 +83,32 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #45a049;
     }
-    
-    /* Result box */
     .result-box {
-        padding: 1.5rem;
+        padding: 2rem;
         border-radius: 10px;
         background-color: #f0f2f6;
         text-align: center;
-        margin: 1rem 0;
+        margin: 2rem 0;
     }
-    
-    /* Question images - constrained size */
     .question-image {
         display: block;
         margin: 1rem auto;
         max-width: 100%;
-        max-height: 400px;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        object-fit: contain;
     }
-    
-    /* Metric card */
     .metric-card {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 0.5rem 0;
-    }
-    
-    /* Question container */
-    .question-container {
         background-color: #f8f9fa;
         padding: 1.5rem;
         border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin: 1rem 0;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
     }
-    
-    /* Reduce spacing */
-    .stMarkdown {
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Center columns content */
-    [data-testid="column"] {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .question-container {
+        background-color: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 1rem 0;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -374,117 +345,93 @@ countries = [
 ]
 
 def create_share_buttons(mbti_type, share_source="result_page"):
-    """Create social media share buttons - icons only, no buttons"""
+    """Create social media share buttons - icons only, no copy link"""
     
-    # Get your actual deployed app URL - UPDATE THIS!
+    # Get your actual deployed app URL
     app_url = "https://pasarfishapp-eu7kqgndtsmiy9pwfz9zrr.streamlit.app/"
     
     # Get the actual fish name
     fish_name = fish_names.get(mbti_type, mbti_type)
     
-    # Get fish image URL (for platforms that support it)
-    fish_image_path = fish_images.get(mbti_type, '')
-    # Convert to full URL if you have it hosted publicly
-    # fish_image_url = f"https://your-domain.com/{fish_image_path}"
-    
     # Share text WITH URL (for most platforms)
-    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today! {app_url}"
+    share_text_with_url = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
     
-    # Share text WITHOUT URL (for Telegram only - URL passed separately)
-    share_text = f"I just discovered I'm a {fish_name} 🐟 Take the Pasarfish quiz to find out which local fish matches your personality today!"
-        
-    # White background container for share section
-    st.markdown('<div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">', unsafe_allow_html=True)
+    # Share text WITHOUT URL (for Telegram - URL passed separately)
+    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
     
-    st.markdown('<h3 style="text-align: center; color: #333;">📢 Share Your Results!</h3>', unsafe_allow_html=True)
+    # Create white box container
+    st.markdown("""
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
+            <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">📢 Share Your Results!</h3>
+        </div>
+    """, unsafe_allow_html=True)
     
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    # Icons row using Streamlit columns (inside conceptual white box)
+    st.markdown('<div style="background-color: white; padding: 0 2rem 2rem 2rem; margin-top: -1rem; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">', unsafe_allow_html=True)
     
-   # Copy Link - shows message to download image
+    col1, col2, col3, col4, col5 = st.columns(5)
+    
+    # Instagram
     with col1:
-        if st.button("🔗", key="copy_btn", help="Copy result"):
-            # Get the fish image path
-            fish_image_path = fish_images.get(mbti_type)
-            fish_name = fish_names.get(mbti_type, mbti_type)
-            
-            st.success("📸 Right-click and select 'Save Image' to download your result!")
-            st.caption(f"Your fish: {fish_name}")
-            track_share("Copy Result", mbti_type, share_source)
-    
-    # Instagram - icon only (screenshot method)
-    with col2:
-        instagram_url = "https://www.instagram.com/"
         st.markdown("""
             <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on Instagram">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-instagram" style="font-size: 40px; color: #E4405F;"></i>
-                    </button>
+                <a href="https://www.instagram.com/" target="_blank" title="Share on Instagram">
+                    <i class="fab fa-instagram" style="font-size: 40px; color: #E4405F;"></i>
                 </a>
             </div>
-        """.format(instagram_url), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
     
-    # X (Twitter) - icon only with auto-filled text
-    with col3:
+    # X (Twitter)
+    with col2:
         x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on X/Twitter">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-x-twitter" style="font-size: 40px; color: #000000;"></i>
-                    </button>
+                    <i class="fab fa-x-twitter" style="font-size: 40px; color: #000000;"></i>
                 </a>
             </div>
         """.format(x_url), unsafe_allow_html=True)
     
-    # LinkedIn - icon only with URL
-    with col4:
+    # LinkedIn
+    with col3:
         linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on LinkedIn">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-linkedin" style="font-size: 40px; color: #0077B5;"></i>
-                    </button>
+                    <i class="fab fa-linkedin" style="font-size: 40px; color: #0077B5;"></i>
                 </a>
             </div>
         """.format(linkedin_url), unsafe_allow_html=True)
     
-    # WhatsApp - icon only with pre-filled message
-    with col5:
+    # WhatsApp
+    with col4:
         whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on WhatsApp">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i>
-                    </button>
+                    <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i>
                 </a>
             </div>
         """.format(whatsapp_url), unsafe_allow_html=True)
     
-    # 2. Update your Telegram logic
-    with col6:
-        # Telegram will now take the 'url' parameter and the 'text' separately
+    # Telegram - text without duplicate URL
+    with col5:
         telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
         st.markdown("""
             <div style="text-align: center;">
                 <a href="{}" target="_blank" title="Share on Telegram">
-                    <button style="background: none; border: none; cursor: pointer;">
-                        <i class="fab fa-telegram" style="font-size: 40px; color: #0088cc;"></i>
-                    </button>
+                    <i class="fab fa-telegram" style="font-size: 40px; color: #0088cc;"></i>
                 </a>
             </div>
         """.format(telegram_url), unsafe_allow_html=True)
     
-    # Helper text
+    # Helper text and close white box
     st.markdown("""
-        <div style="text-align: center; margin-top: 1rem; color: #888; font-size: 12px;">
-            💡 Click on the icons to share your result! For Instagram, save the image above and post.
+        <div style="text-align: center; margin-top: 1.5rem; padding-bottom: 1rem; color: #888; font-size: 12px;">
+            💡 Click icons to share! For Instagram, screenshot this page.
+        </div>
         </div>
     """, unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)  # Close white background container
     
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
@@ -561,16 +508,15 @@ def demographics_page():
         <h1 style="text-align: center;">🐟 Which Local Fish Are You?</h1>
     """, unsafe_allow_html=True)
     
-    # Center-aligned image with white background - ALL in one container
+    # White background wrapper - open
+    st.markdown("""
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 800px;">
+    """, unsafe_allow_html=True)
+    
+    # Center-aligned image using columns
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        # Single white box containing the image
-        st.markdown("""
-            <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-        """, unsafe_allow_html=True)
-        
-        # Image will be inside the white box
         if os.path.exists('Pasar Fish.png'):
             st.image('Pasar Fish.png', use_container_width=True)
         elif os.path.exists('images/Pasar Fish.png'):
@@ -579,9 +525,9 @@ def demographics_page():
             st.image('Pasar Fish.jpg', use_container_width=True)
         elif os.path.exists('images/Pasar Fish.jpg'):
             st.image('images/Pasar Fish.jpg', use_container_width=True)
-        
-        # Close white box
-        st.markdown("</div>", unsafe_allow_html=True)
+    
+    # White background wrapper - close
+    st.markdown("</div>", unsafe_allow_html=True)
     
     # Center-aligned text
     st.markdown("""
