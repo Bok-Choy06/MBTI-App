@@ -346,92 +346,66 @@ countries = [
 ]
 
 def create_share_buttons(mbti_type, share_source="result_page"):
-    """Create social media share buttons - icons only, no copy link"""
+    """Create social media share buttons - unified in one white box"""
     
-    # Get your actual deployed app URL
+    # 1. Define base variables
     app_url = "https://pasarfishapp-eu7kqgndtsmiy9pwfz9zrr.streamlit.app/"
-    
-    # Get the actual fish name
     fish_name = fish_names.get(mbti_type, mbti_type)
     
-    # Share text WITH URL (for most platforms)
+    # 2. Define share texts
     share_text_with_url = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality: {app_url}"
+    share_text_only = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
     
-    # Share text WITHOUT URL (for Telegram - URL passed separately)
-    share_text = f"I just discovered I'm a {fish_name} 🐟! Take the quiz here to find out which local fish matches your personality:"
+    # 3. Pre-calculate all URLs so they are available for the HTML string
+    x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
+    linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
+    whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
+    telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text_only)}"
     
-    # Create white box container
-    st.markdown("""
-        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0;">
-            <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">📢 Share Your Results!</h3>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Icons row using Streamlit columns (inside conceptual white box)
-    st.markdown('<div style="background-color: white; padding: 0 2rem 2rem 2rem; margin-top: -1rem; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">', unsafe_allow_html=True)
-    
-    col1, col2, col3, col4, col5 = st.columns(5)
-    
-    # Instagram
-    with col1:
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="https://www.instagram.com/" target="_blank" title="Share on Instagram">
+    # 4. Render EVERYTHING in one single block to eliminate gaps
+    st.markdown(f"""
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem 0; color: #333;">
+            
+            <h3 style="text-align: center; margin-bottom: 2rem; color: #333;">📢 Share Your Results!</h3>
+            
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                
+                <a href="https://www.instagram.com/" target="_blank" title="Share on Instagram" style="text-decoration: none;">
                     <i class="fab fa-instagram" style="font-size: 40px; color: #E4405F;"></i>
                 </a>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    # X (Twitter)
-    with col2:
-        x_url = f"https://twitter.com/intent/tweet?text={quote(share_text_with_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on X/Twitter">
+
+                <a href="{x_url}" target="_blank" title="Share on X" style="text-decoration: none;">
                     <i class="fab fa-x-twitter" style="font-size: 40px; color: #000000;"></i>
                 </a>
-            </div>
-        """.format(x_url), unsafe_allow_html=True)
-    
-    # LinkedIn
-    with col3:
-        linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url={quote(app_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on LinkedIn">
+
+                <a href="{linkedin_url}" target="_blank" title="Share on LinkedIn" style="text-decoration: none;">
                     <i class="fab fa-linkedin" style="font-size: 40px; color: #0077B5;"></i>
                 </a>
-            </div>
-        """.format(linkedin_url), unsafe_allow_html=True)
-    
-    # WhatsApp
-    with col4:
-        whatsapp_url = f"https://wa.me/?text={quote(share_text_with_url)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on WhatsApp">
+
+                <a href="{whatsapp_url}" target="_blank" title="Share on WhatsApp" style="text-decoration: none;">
                     <i class="fab fa-whatsapp" style="font-size: 40px; color: #25D366;"></i>
                 </a>
-            </div>
-        """.format(whatsapp_url), unsafe_allow_html=True)
-    
-    # Telegram - text without duplicate URL
-    with col5:
-        telegram_url = f"https://t.me/share/url?url={quote(app_url)}&text={quote(share_text)}"
-        st.markdown("""
-            <div style="text-align: center;">
-                <a href="{}" target="_blank" title="Share on Telegram">
+
+                <a href="{telegram_url}" target="_blank" title="Share on Telegram" style="text-decoration: none;">
                     <i class="fab fa-telegram" style="font-size: 40px; color: #0088cc;"></i>
                 </a>
             </div>
-        """.format(telegram_url), unsafe_allow_html=True)
-    
-    # Helper text and close white box
-    st.markdown("""
-        <div style="text-align: center; margin-top: 1.5rem; padding-bottom: 1rem; color: #888; font-size: 12px;">
-            💡 Click icons to share! For Instagram, screenshot this page.
+
+            <div style="text-align: center; margin-top: 1.5rem; color: #888; font-size: 12px; border-top: 1px solid #eee; padding-top: 1rem;">
+                💡 Click icons to share! For Instagram, screenshot this page.
+            </div>
+
         </div>
-        </div>
+        
+        <style>
+            /* CSS with double curly braces for f-string compatibility */
+            .fab {{
+                transition: transform 0.2s ease-in-out;
+            }}
+            .fab:hover {{
+                transform: scale(1.2);
+            }}
+        </style>
     """, unsafe_allow_html=True)
     
 def track_share(platform, mbti_type, source):
