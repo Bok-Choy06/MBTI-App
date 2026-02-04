@@ -411,6 +411,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
         </div>
     """.format(x_url=x_url, linkedin_url=linkedin_url, whatsapp_url=whatsapp_url, telegram_url=telegram_url)
     
+     # CRITICAL: Add unsafe_allow_html=True
     st.markdown(html_content, unsafe_allow_html=True)
     
 def track_share(platform, mbti_type, source):
