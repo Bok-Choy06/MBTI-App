@@ -50,7 +50,7 @@ st.markdown("""
     
     /* Images scale to screen */
     img {
-        max-width: 90vw !important;
+        max-width: 100vw !important;
         max-height: 40vh !important;
         width: auto !important;
         height: auto !important;
