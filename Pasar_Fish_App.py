@@ -548,7 +548,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                     </a>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 1rem; color: #888; font-size: 12px;">
+            <div style="text-align: center; margin-top: 1rem; color: #666;">
                 💡 Click icons to share! For Instagram, screenshot this page.
             </div>
         </div>
@@ -995,7 +995,7 @@ def show_results():
     
     st.info(f"⏱️ Completed in: {time_str}")
     
-    st.markdown("## 🎉 Your Fish!")
+    st.markdown("<h2 style='text-align: center;'>🎉 Your Fish!</h2>", unsafe_allow_html=True)
 
     # Display fish image instead of MBTI type text
     fish_image_path = fish_images.get(mbti_type)
