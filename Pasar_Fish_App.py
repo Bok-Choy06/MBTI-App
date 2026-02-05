@@ -10,6 +10,11 @@ from urllib.parse import quote
 import json
 import os
 
+def get_image_base64(image_path):
+    """Convert image to base64 for HTML display"""
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
 # Set page config
 st.set_page_config(
     page_title="Which Local Fish Are You?", 
@@ -51,6 +56,17 @@ st.markdown("""
         height: auto !important;
         object-fit: contain !important;
         margin: 1vh auto !important;
+        display: block !important;
+    }
+
+    /* Results page fish image - larger */
+    .result-fish-image {
+        max-width: 90vw !important;
+        max-height: 70vh !important;  /* Much larger for results */
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        margin: 2vh auto !important;
         display: block !important;
     }
     
@@ -122,6 +138,23 @@ st.markdown("""
             max-height: 50vh !important;
         }
     }
+
+    /* Force navigation buttons side-by-side on mobile */
+    @media (max-width: 768px) {
+        [data-testid="column"] {
+            width: 50% !important;
+            flex: 1 1 50% !important;
+            min-width: 0 !important;
+        }
+        
+        /* Specifically for 3-column layouts (Previous, empty, Next) */
+        div[data-testid="column"]:nth-child(2) {
+            width: 0% !important;
+            flex: 0 0 0% !important;
+            padding: 0 !important;
+        }
+    }
+    
     </style>
     """, unsafe_allow_html=True)
 
@@ -402,9 +435,49 @@ def create_share_buttons(mbti_type, share_source="result_page"):
     telegram_url = "https://t.me/share/url?url=" + quote(app_url) + "&text=" + quote(share_text)
     
     st.markdown("""
-        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 900px;">
+        <style>
+        /* Share buttons - responsive layout */
+        .share-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+        
+        .share-icons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 1rem;
+        }
+        
+        /* Mobile: single row, smaller icons, tighter spacing */
+        @media (max-width: 768px) {
+            .share-icons {
+                flex-wrap: nowrap !important;
+                gap: 0.5rem !important;
+                padding: 0.5rem !important;
+                overflow-x: auto;
+                justify-content: space-between;
+            }
+            
+            .share-icons i {
+                font-size: 36px !important;
+            }
+            
+            .share-container {
+                padding: 1rem !important;
+            }
+        }
+        </style>
+        
+        <div class="share-container">
             <h3 style="text-align: center; color: #333; margin-bottom: 2rem;">📢 Share Your Results!</h3>
-            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem; padding: 1rem;">
+            <div class="share-icons">
                 <div style="text-align: center;">
                     <a href="https://www.instagram.com/" target="_blank">
                         <i class="fab fa-instagram" style="font-size: 48px; color: #E4405F;"></i>
@@ -887,7 +960,7 @@ def show_results():
 
     if fish_image_path and os.path.exists(fish_image_path):
         # Display the fish image at full width
-        st.image(fish_image_path, use_container_width=True)
+        st.markdown(f'<img src="data:image/png;base64,{get_image_base64(fish_image_path)}" class="result-fish-image" />', unsafe_allow_html=True)
     else:
         # Fallback if image doesn't exist
         st.markdown(f"""
