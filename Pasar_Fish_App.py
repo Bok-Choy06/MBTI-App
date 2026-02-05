@@ -549,7 +549,7 @@ def create_share_buttons(mbti_type, share_source="result_page"):
                 </div>
             </div>
             <div style="text-align: center; margin-top: 1rem; color: #666;">
-                💡 Click icons to share! For Instagram, screenshot this page.
+                💡 Click on the icons to share!
             </div>
         </div>
     """, unsafe_allow_html=True)
