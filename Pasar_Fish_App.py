@@ -683,6 +683,7 @@ def demographics_page():
         st.session_state.demographics_start_time = datetime.now()
     
     st.markdown("---")
+    st.markdown("### 📋 Demographics")
     
     col1, col2 = st.columns(2)
     
