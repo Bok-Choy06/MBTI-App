@@ -125,6 +125,38 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# JavaScript to detect and adjust to screen size
+st.markdown("""
+    <script>
+    // Detect screen size and adjust zoom
+    function adjustToScreen() {
+        const screenHeight = window.innerHeight;
+        const screenWidth = window.innerWidth;
+        
+        // Calculate optimal zoom level
+        let zoomLevel = 1;
+        
+        if (screenHeight < 700) {
+            zoomLevel = 0.85;  // Small screens - zoom out
+        } else if (screenHeight < 900) {
+            zoomLevel = 0.95;  // Medium screens - slight zoom out
+        } else if (screenHeight > 1200) {
+            zoomLevel = 1.1;   // Large screens - zoom in slightly
+        }
+        
+        // Apply zoom
+        document.body.style.zoom = zoomLevel;
+        
+        // Log for debugging
+        console.log('Screen: ' + screenWidth + 'x' + screenHeight + ', Zoom: ' + zoomLevel);
+    }
+    
+    // Run on load and resize
+    window.addEventListener('load', adjustToScreen);
+    window.addEventListener('resize', adjustToScreen);
+    </script>
+""", unsafe_allow_html=True)
+
 # Add Font Awesome for brand icons
 st.markdown("""
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
