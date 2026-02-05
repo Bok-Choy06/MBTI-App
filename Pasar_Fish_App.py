@@ -155,25 +155,49 @@ st.markdown("""
         }
     }
 
-    /* Remove top padding/margin from main container */
+    /* Aggressive space removal */
     .main .block-container {
-        padding-top: 1rem !important;
+        padding-top: 0.5rem !important;
+        padding-bottom: 1rem !important;
     }
     
-    /* Remove extra space above title */
-    h1 {
+    /* Remove all top margins and padding */
+    h1, h2, h3 {
         margin-top: 0 !important;
         padding-top: 0 !important;
     }
     
-    /* Streamlit default header spacing removal */
-    .stApp header {
-        background-color: transparent;
+    /* Tighten up the title specifically */
+    .main .block-container > div:first-child {
+        padding-top: 0 !important;
     }
     
-    /* Remove top padding from app */
-    section.main > div {
-        padding-top: 1rem !important;
+    /* Remove Streamlit's default top spacing */
+    .stApp > header {
+        height: 0rem;
+    }
+    
+    /* Compact everything at the top */
+    section[data-testid="stAppViewContainer"] > div:first-child {
+        padding-top: 0 !important;
+    }
+    
+    /* Remove extra space above progress bar */
+    .stProgress {
+        margin-top: 0.25rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Tighten caption spacing */
+    .stCaption {
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Remove space above horizontal rules */
+    hr {
+        margin-top: 0.5rem !important;
+        margin-bottom: 1rem !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -624,12 +648,15 @@ def show_progress():
     """Display progress bar"""
     total_steps = 13  # 1 demographics + 12 questions
     current = st.session_state.current_step
+    
+    # Skip progress bar on demographics page (step 0)
+    if current == 0:
+        return
+    
     progress = current / total_steps
     
     st.progress(progress)
-    if current == 0:
-        st.caption("📋 Demographics")
-    elif current <= 12:
+    if current <= 12:
         st.caption(f"Question {current} of 12")
     else:
         st.caption("✅ Complete!")
@@ -676,14 +703,12 @@ def demographics_page():
         <h4 style="text-align: center;">Let's start with a few details about you.</h4>
     """, unsafe_allow_html=True)
     
-    show_progress()
-    
     # Track page start time (only set once per page load)
     if 'demographics_start_time' not in st.session_state:
         st.session_state.demographics_start_time = datetime.now()
     
     st.markdown("---")
-    st.markdown("### 📋 Demographics")
+    st.markdown("### 🌎 Demographics")
     
     col1, col2 = st.columns(2)
     
