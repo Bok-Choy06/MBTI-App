@@ -20,96 +20,107 @@ st.set_page_config(
 
 st.markdown("""
     <style>
-    /* Force all images to be reasonable sizes */
-    img {
-        max-width: 100% !important;
-        height: auto !important;
-        object-fit: contain !important;
+    /* Force content to fit viewport */
+    .main .block-container {
+        max-height: 100vh;
+        overflow-y: auto;
+        padding: 1vh 2vw;
     }
     
-    /* Main container */
+    /* Scale everything to viewport */
     .main {
-        padding: 1rem;
-        max-width: 100%;
+        padding: 1vh 2vw;
+        max-width: 100vw;
     }
     
-    /* Desktop - constrain image sizes */
-    @media (min-width: 769px) {
-        .main img {
-            max-width: 500px !important;
-            max-height: 400px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            display: block !important;
-        }
-    }
-    
-    /* Mobile - smaller images */
-    @media (max-width: 768px) {
-        .main {
-            padding: 0.5rem;
-        }
-        .main img {
-            max-width: 280px !important;
-            max-height: 280px !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            display: block !important;
-        }
-        h1 {
-            font-size: 1.5rem !important;
-        }
-        h3 {
-            font-size: 1.2rem !important;
-        }
-    }
-    
-    /* Constrain the white background boxes */
-    .main > div > div > div {
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .stButton>button {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 0.5rem;
-        font-size: 1.1rem;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-    }
-    .stButton>button:hover {
-        background-color: #45a049;
-    }
-    .result-box {
-        padding: 2rem;
-        border-radius: 10px;
-        background-color: #f0f2f6;
-        text-align: center;
-        margin: 2rem 0;
-    }
-    .question-image {
-        display: block;
-        margin: 1rem auto;
-        max-width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    .metric-card {
-        background-color: #f8f9fa;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 1rem 0;
-    }
+    /* Question container fits screen */
     .question-container {
         background-color: #f8f9fa;
-        padding: 2rem;
+        padding: 2vh 2vw;
         border-radius: 10px;
-        margin: 1rem 0;
+        margin: 1vh 0;
+        max-height: 80vh;
+        overflow: visible;
+    }
+    
+    /* Images scale to screen */
+    img {
+        max-width: 90vw !important;
+        max-height: 40vh !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        margin: 1vh auto !important;
+        display: block !important;
+    }
+    
+    /* Responsive text sizing */
+    h1 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem) !important;
+    }
+    
+    h3 {
+        font-size: clamp(1rem, 3vw, 1.5rem) !important;
+    }
+    
+    h4 {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem) !important;
+    }
+    
+    p, .stMarkdown {
+        font-size: clamp(0.85rem, 2vw, 1rem) !important;
+    }
+    
+    /* Button sizing */
+    .stButton>button {
+        font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+        padding: 1vh 2vw !important;
+    }
+    
+    /* Radio buttons and inputs */
+    .stRadio, .stSelectbox {
+        font-size: clamp(0.85rem, 2vw, 1rem) !important;
+    }
+    
+    /* Reduce spacing between elements */
+    .stMarkdown {
+        margin-bottom: 0.5vh !important;
+    }
+    
+    /* Progress bar */
+    .stProgress {
+        height: 1vh !important;
+    }
+    
+    /* Responsive breakpoints */
+    @media (max-height: 800px) {
+        /* Smaller screens - compress more */
+        .question-container {
+            padding: 1.5vh 2vw;
+        }
+        img {
+            max-height: 30vh !important;
+        }
+    }
+    
+    @media (max-height: 600px) {
+        /* Very small screens - ultra compact */
+        .question-container {
+            padding: 1vh 1.5vw;
+        }
+        img {
+            max-height: 25vh !important;
+        }
+        h1 {
+            font-size: 1.3rem !important;
+        }
+    }
+    
+    @media (min-height: 1000px) {
+        /* Large screens - more breathing room */
+        img {
+            max-height: 50vh !important;
+        }
     }
     </style>
     """, unsafe_allow_html=True)
