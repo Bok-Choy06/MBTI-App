@@ -437,6 +437,47 @@ def create_share_buttons(mbti_type, share_source="result_page"):
         </div>
     """, unsafe_allow_html=True)
     
+def show_follow_section():
+    """Display Follow Pasar Fish section - reusable across all pages"""
+    st.markdown("""
+        <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 900px;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3 style="color: #333; margin-bottom: 0.5rem;">🌐 Follow Pasar Fish!</h3>
+                <p style="color: #666;">Stay connected with us for more fishy adventures:</p>
+            </div>
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://pasarfish.com" target="_blank" style="text-decoration: none;">
+                        <i class="fas fa-globe" style="font-size: 32px; color: #4CAF50;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">Pasarfish.com</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://instagram.com/pasarfishsg" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-instagram" style="font-size: 32px; color: #E4405F;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://linkedin.com/company/pasarfish" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-linkedin" style="font-size: 32px; color: #0077B5;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfish</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-facebook" style="font-size: 32px; color: #1877F2;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+    
 def track_share(platform, mbti_type, source):
     """Track share button clicks to Google Sheets"""
     try:
@@ -640,7 +681,11 @@ def demographics_page():
             st.session_state.question_start_times['Q1'] = datetime.now()
             st.session_state.current_step = 1
             st.rerun()
-
+            
+    # Add follow section at bottom
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    show_follow_section()
+    
 def question_page(question_num):
     """Show individual question page"""
     q_id = f'Q{question_num}'
@@ -740,7 +785,11 @@ def question_page(question_num):
                 
                 calculate_and_save_result()
                 st.rerun()
-
+                
+    # Add follow section at bottom of every question page
+    st.markdown("<br>", unsafe_allow_html=True)
+    show_follow_section()
+    
 def calculate_and_save_result():
     """Calculate MBTI result and save to Google Sheets"""
     try:
@@ -920,7 +969,11 @@ def show_results():
             if 'demographics_start_time' in st.session_state:
                 del st.session_state.demographics_start_time
             st.rerun()
-
+            
+    # Follow section at bottom
+    st.markdown("<br>", unsafe_allow_html=True)
+    show_follow_section()
+    
 def survey_page():
     """Main survey page controller"""
     initialize_session_state()
@@ -1261,6 +1314,10 @@ def analytics_page():
         file_name=f"mbti_survey_data_{datetime.now().strftime('%Y%m%d')}.csv",
         mime="text/csv"
     )
+
+    # Follow section at bottom
+    st.markdown("<br>", unsafe_allow_html=True)
+    show_follow_section()
 
 def main():
     # Sidebar navigation
