@@ -155,8 +155,26 @@ st.markdown("""
         }
     }
 
-
+    /* Remove top padding/margin from main container */
+    .main .block-container {
+        padding-top: 1rem !important;
+    }
     
+    /* Remove extra space above title */
+    h1 {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    /* Streamlit default header spacing removal */
+    .stApp header {
+        background-color: transparent;
+    }
+    
+    /* Remove top padding from app */
+    section.main > div {
+        padding-top: 1rem !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
