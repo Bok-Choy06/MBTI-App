@@ -565,7 +565,7 @@ def show_follow_section():
     st.markdown("""
         <div style="background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 900px;">
             <div style="text-align: center; margin-bottom: 2rem;">
-                <h3 style="color: #333; margin-bottom: 0.5rem;">🌐 Follow Pasar Fish!</h3>
+                <h3 style="color: #333; margin-bottom: 0.5rem;">🌐 Follow Pasarfish!</h3>
                 <p style="color: #666;">Stay connected with us for more fishy adventures:</p>
             </div>
             <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem;">
