@@ -1053,18 +1053,6 @@ def survey_page():
 
 def analytics_page():
     """Analytics dashboard page"""
-
-    # Map MBTI types to fish names - handle different possible column names
-    if 'MBTI_Type' in df.columns:
-        df['Fish_Name'] = df['MBTI_Type'].map(fish_names)
-    elif 'MBTI Type' in df.columns:
-        df['Fish_Name'] = df['MBTI Type'].map(fish_names)
-    elif 'mbti_type' in df.columns:
-        df['Fish_Name'] = df['mbti_type'].map(fish_names)
-    else:
-        st.error("⚠️ MBTI_Type column not found in data. Please check your Google Sheets column names.")
-        st.write("Available columns:", df.columns.tolist())
-        return
     
     st.markdown(
         """
@@ -1082,6 +1070,18 @@ def analytics_page():
     
     if df is None or len(df) == 0:
         st.info("📭 No quiz responses yet. Share your fish quiz to start collecting data! 🐟")
+        return
+
+    # Map MBTI types to fish names - ADD THIS SECTION HERE
+    if 'MBTI_Type' in df.columns:
+        df['Fish_Name'] = df['MBTI_Type'].map(fish_names)
+    elif 'MBTI Type' in df.columns:
+        df['Fish_Name'] = df['MBTI Type'].map(fish_names)
+    elif 'mbti_type' in df.columns:
+        df['Fish_Name'] = df['mbti_type'].map(fish_names)
+    else:
+        st.error("⚠️ MBTI_Type column not found in data. Please check your Google Sheets column names.")
+        st.write("Available columns:", df.columns.tolist())
         return
     
     # Overview metrics
