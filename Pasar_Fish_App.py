@@ -139,33 +139,28 @@ st.markdown("""
         }
     }
 
-    /* Force navigation buttons side-by-side on mobile - IMPROVED */
+    /* Reverse button order on mobile - Next on top, Previous below */
     @media (max-width: 768px) {
-        /* Make columns display horizontally */
-        div[data-testid="column"] {
-            width: calc(50% - 0.5rem) !important;
-            flex: 1 1 auto !important;
-            min-width: 0 !important;
+        div[data-testid="stHorizontalBlock"] {
+            display: flex !important;
+            flex-direction: column-reverse !important;
         }
         
-        /* Hide the middle empty column on mobile */
+        div[data-testid="column"] {
+            width: 100% !important;
+        }
+        
+        /* Hide middle column */
         div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-child(2) {
             display: none !important;
         }
         
-        /* Force parent container to be horizontal */
-        div[data-testid="stHorizontalBlock"] {
-            flex-direction: row !important;
-            gap: 1rem !important;
-        }
-        
-        /* Make buttons smaller text on mobile */
-        .stButton > button {
-            font-size: 0.9rem !important;
-            padding: 0.5rem 1rem !important;
+        /* Add spacing between buttons */
+        .stButton {
+            margin-bottom: 0.5rem !important;
         }
     }
-
+    
     /* Aggressive space removal */
     .main .block-container {
         padding-top: 0.5rem !important;
@@ -866,11 +861,15 @@ def question_page(question_num):
     st.markdown("---")
     
     # Navigation buttons
+    # Check if mobile (using browser width detection would be ideal, but we'll use CSS to handle it)
     col1, col2, col3 = st.columns([1, 1, 1])
+    
+    # Desktop order: Previous (left), empty (middle), Next (right)
+    # Mobile will stack: Next, Previous (via CSS reordering)
     
     with col1:
         if question_num > 1:
-            if st.button("⬅️ Previous", use_container_width=True):
+            if st.button("⬅️ Previous", use_container_width=True, key="prev_btn"):
                 # Record time spent on current question before going back
                 if q_id in st.session_state.question_start_times:
                     duration = (datetime.now() - st.session_state.question_start_times[q_id]).total_seconds()
@@ -886,7 +885,7 @@ def question_page(question_num):
     
     with col3:
         if question_num < 12:
-            if st.button("Next ➡️", use_container_width=True, type="primary"):
+            if st.button("Next ➡️", use_container_width=True, type="primary", key="next_btn"):
                 # Record time spent on current question
                 if q_id in st.session_state.question_start_times:
                     duration = (datetime.now() - st.session_state.question_start_times[q_id]).total_seconds()
@@ -899,7 +898,7 @@ def question_page(question_num):
                 st.session_state.current_step += 1
                 st.rerun()
         else:
-            if st.button("🎯 Get Results", use_container_width=True, type="primary"):
+            if st.button("🎯 Get Results", use_container_width=True, type="primary", key="results_btn"):
                 # Record time spent on final question
                 if q_id in st.session_state.question_start_times:
                     duration = (datetime.now() - st.session_state.question_start_times[q_id]).total_seconds()
