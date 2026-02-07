@@ -529,32 +529,36 @@ def show_follow_section():
                 <h3 style="color: #333; margin-bottom: 0.5rem;">🌐 Follow Pasar Fish!</h3>
                 <p style="color: #666;">Stay connected with us for more fishy adventures:</p>
             </div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Create clickable follow buttons
-    col1, col2, col3, col4 = st.columns(4)
-    
-    follow_links = {
-        'Website': ('https://pasarfish.com', '🌐 Pasarfish.com'),
-        'Instagram': ('https://instagram.com/pasarfishsg', '📸 @Pasarfishsg'),
-        'LinkedIn': ('https://linkedin.com/company/pasarfish', '💼 @Pasarfish'),
-        'Facebook': ('https://www.facebook.com/p/Pasarfishsg-61568193013803/', '👍 @Pasarfishsg')
-    }
-    
-    cols = [col1, col2, col3, col4]
-    platforms = ['Website', 'Instagram', 'LinkedIn', 'Facebook']
-    
-    for col, platform in zip(cols, platforms):
-        url, label = follow_links[platform]
-        with col:
-            if st.button(label, key=f"follow_{platform}_{id(st)}", use_container_width=True):
-                track_click("follow", platform, None, "follow_section")
-                st.markdown(f'<meta http-equiv="refresh" content="0;url={url}">', unsafe_allow_html=True)
-                st.success(f"Opening {platform}...")
-    
-    st.markdown("""
-        <div style="background-color: white; padding: 0 2rem 2rem 2rem; border-radius: 0 0 15px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: -2rem auto 2rem auto; max-width: 900px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 2rem;">
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://pasarfish.com" target="_blank" style="text-decoration: none;">
+                        <i class="fas fa-globe" style="font-size: 48px; color: #4CAF50;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">Pasarfish.com</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://instagram.com/pasarfishsg" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-instagram" style="font-size: 48px; color: #E4405F;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://linkedin.com/company/pasarfish" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-linkedin" style="font-size: 48px; color: #0077B5;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfish</span>
+                    </a>
+                </div>
+                <div style="text-align: center; padding: 1rem;">
+                    <a href="https://www.facebook.com/p/Pasarfishsg-61568193013803/" target="_blank" style="text-decoration: none;">
+                        <i class="fab fa-facebook" style="font-size: 48px; color: #1877F2;"></i>
+                        <br><br>
+                        <span style="font-size: 14px; color: #4A90E2;">@Pasarfishsg</span>
+                    </a>
+                </div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
     
