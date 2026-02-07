@@ -1129,13 +1129,17 @@ def analytics_page():
     col1, col2 = st.columns(2)
     
     with col1:
-        # Pie chart with fish names
+        # Pie chart with fish names - using extended color palette
         type_counts = df['Fish_Name'].value_counts()
+        
+        # Create a color palette with 16+ distinct colors
+        colors = px.colors.qualitative.Light24  # Has 24 colors
+        
         fig_pie = px.pie(
             values=type_counts.values,
             names=type_counts.index,
             title="Fish Types Distribution",
-            color_discrete_sequence=px.colors.qualitative.Set3
+            color_discrete_sequence=colors
         )
         fig_pie.update_traces(textposition='inside', textinfo='percent+label')
         st.plotly_chart(fig_pie, use_container_width=True)
