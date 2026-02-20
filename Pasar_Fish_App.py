@@ -1213,10 +1213,18 @@ def analytics_page():
         x='Date',
         y='Responses',
         title="Daily Response Count",
-        markers=True
+        markers=True,
+        text='Responses'  # Add this line to show values
     )
-    st.plotly_chart(fig_timeline, use_container_width=True)
     
+    # Customize text appearance
+    fig_timeline.update_traces(
+        textposition='top center',  # Position text above the points
+        textfont=dict(size=12, color='white'),  # Text styling
+        texttemplate='%{text}'  # Show the exact value
+    )
+    
+    st.plotly_chart(fig_timeline, use_container_width=True)
     st.markdown("---")
     
     # Referral Source
